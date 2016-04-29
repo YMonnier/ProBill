@@ -17,6 +17,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        //Test
+        NSLog(" ======== Insert ======== ")
+        let cats: [String] = ["Car", "Boat", "Food"]
+
+        for cat in cats {
+            let category: Category = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: self.managedObjectContext) as! Category
+            category.name = cat
+        }
+        
+        self.saveContext()
+        NSLog(" ======== Fetch ======== ")
+        var error: NSError? = nil
+        var result: [AnyObject]?
+        
+        let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+        
+        do {
+            result = try self.managedObjectContext.executeFetchRequest(fetch)
+        } catch let nserror1 as NSError{
+            error = nserror1
+            result = nil
+        }
+        
+        for resultItem in result! {
+            let catObject = resultItem as! Category
+            NSLog("Fetched Categoty for \(catObject.name) ")
+            self.managedObjectContext.deleteObject(catObject)
+        }
+        self.saveContext()
+        
         return true
     }
 
@@ -36,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
