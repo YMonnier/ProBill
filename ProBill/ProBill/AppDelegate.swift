@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //self.insert()
+        //self.fetch()
         
         return true
     }
@@ -31,9 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for cat in cats {
             let category: Category = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: self.managedObjectContext) as! Category
             category.name = cat
+            
+            let subCategory: SubCategory = NSEntityDescription.insertNewObjectForEntityForName("SubCategory", inManagedObjectContext: self.managedObjectContext) as! SubCategory
+            subCategory.name = "SubTest"
+            subCategory.category = category
         }
         
         self.saveContext()
+    
+    }
+    
+    private func fetch() {
         NSLog(" ======== Fetch ======== ")
         var error: NSError? = nil
         var result: [AnyObject]?
@@ -49,11 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         for resultItem in result! {
             let catObject = resultItem as! Category
-            NSLog("Fetched Categoty for \(catObject.name) ")
+            NSLog("Fetched Category for \(catObject.name) ")
+            for subCat in catObject.subCategories {
+                NSLog("\(subCat)")
+            }
+            
             //    self.managedObjectContext.deleteObject(catObject)
         }
-        //self.saveContext()
-    
     }
 
     func applicationWillResignActive(application: UIApplication) {

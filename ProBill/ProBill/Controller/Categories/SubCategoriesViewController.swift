@@ -1,24 +1,26 @@
 //
-//  CategoriesViewController.swift
+//  SubCategoriesViewController.swift
 //  ProBill
 //
 //  Created by Ysée Monnier on 29/04/16.
 //  Copyright © 2016 MONNIER Ysee. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 
-class CategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    var category: Category?
     var managedObjectContext: NSManagedObjectContext? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
+
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
     }
     
@@ -27,19 +29,25 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func insertNewObject(sender: AnyObject) {
-        let alert = UIAlertController(title: "Categories", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Sub Categories", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-            textField.placeholder = "Your category"
+            textField.placeholder = "Your sub category"
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            print("TEST")
             let textField = alert.textFields![0] as UITextField
-            let category = textField.text
+            print("TEST")
+            let subCategory = textField.text
+            print("TEST")
             let context = self.fetchedResultsController.managedObjectContext
+            print("TEST")
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Category
-            
-            newManagedObject.name = category!
+            print("TEST")
+            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! SubCategory
+            print("TEST")
+            newManagedObject.name = subCategory!
+            newManagedObject.category = self.category!
             
             // Save the context.
             do {
@@ -47,7 +55,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             } catch {
                 abort()
             }
-
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) in
@@ -55,32 +63,17 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-        
-        /*
-         */
     }
     
-    // MARK: - Segues
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showSubCat" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! SubCategoriesViewController
-                controller.category = object
-            }
-        }
-    }
     
     //MARK: - TableView Delegate
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        print("\(#function) -- \(self.fetchedResultsController.sections?.count ?? 0)")
         return self.fetchedResultsController.sections?.count ?? 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(#function) -- \(self.fetchedResultsController.sections![0].numberOfObjects)")
+        print(self.fetchedResultsController.sections![0].numberOfObjects)
         return self.fetchedResultsController.sections![0].numberOfObjects
     }
     
@@ -92,7 +85,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -106,7 +99,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
-
+    
     
     private func configureCell(cell: CategoriesCellView, atIndexPath indexPath: NSIndexPath) {
         let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
@@ -119,15 +112,17 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
-
+        
         let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
+        let entity = NSEntityDescription.entityForName("SubCategory", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
+        fetchRequest.predicate = NSPredicate(format: "category.name == '%@'", self.category!.name)
+
         
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: "Category")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: "SubCategorie")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
@@ -159,18 +154,18 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Left)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Left)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
             self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)! as! CategoriesCellView, atIndexPath: indexPath!)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-    }
+    }   
 }

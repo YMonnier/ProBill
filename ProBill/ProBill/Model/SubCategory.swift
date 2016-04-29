@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(SubCategory)
 class SubCategory: NSManagedObject {
     //@NSManaged var id: Int
     @NSManaged var name: String
