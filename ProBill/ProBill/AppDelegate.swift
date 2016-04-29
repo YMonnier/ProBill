@@ -18,11 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //self.insert()
         
+        return true
+    }
+    
+    private func insert() {
         //Test
         NSLog(" ======== Insert ======== ")
         let cats: [String] = ["Car", "Boat", "Food"]
-
+        
         for cat in cats {
             let category: Category = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: self.managedObjectContext) as! Category
             category.name = cat
@@ -45,11 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for resultItem in result! {
             let catObject = resultItem as! Category
             NSLog("Fetched Categoty for \(catObject.name) ")
-            self.managedObjectContext.deleteObject(catObject)
+            //    self.managedObjectContext.deleteObject(catObject)
         }
-        self.saveContext()
-        
-        return true
+        //self.saveContext()
+    
     }
 
     func applicationWillResignActive(application: UIApplication) {

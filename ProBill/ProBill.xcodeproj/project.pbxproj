@@ -18,6 +18,7 @@
 		489B444C1CD3BF29003208EA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B444B1CD3BF29003208EA /* Category.swift */; };
 		489B444E1CD3C065003208EA /* SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B444D1CD3C065003208EA /* SubCategory.swift */; };
 		489B44501CD3C137003208EA /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B444F1CD3C137003208EA /* Bill.swift */; };
+		489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B44551CD3D5CD003208EA /* CategoriesCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		489B444B1CD3BF29003208EA /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		489B444D1CD3C065003208EA /* SubCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategory.swift; sourceTree = "<group>"; };
 		489B444F1CD3C137003208EA /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		489B44551CD3D5CD003208EA /* CategoriesCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +89,9 @@
 		489B441E1CD37C08003208EA /* ProBill */ = {
 			isa = PBXGroup;
 			children = (
-				489B44421CD3B5CE003208EA /* Controller */,
 				489B44451CD3B5CE003208EA /* Model */,
 				489B44461CD3B5CE003208EA /* View */,
+				489B44421CD3B5CE003208EA /* Controller */,
 				489B441F1CD37C08003208EA /* AppDelegate.swift */,
 				489B44231CD37C08003208EA /* Main.storyboard */,
 				489B44291CD37C08003208EA /* Assets.xcassets */,
@@ -147,8 +149,25 @@
 		489B44461CD3B5CE003208EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				489B44531CD3D568003208EA /* Bills */,
+				489B44541CD3D568003208EA /* Categories */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		489B44531CD3D568003208EA /* Bills */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bills;
+			sourceTree = "<group>";
+		};
+		489B44541CD3D568003208EA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				489B44551CD3D5CD003208EA /* CategoriesCellView.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +275,7 @@
 				489B444C1CD3BF29003208EA /* Category.swift in Sources */,
 				489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */,
 				489B444A1CD3B703003208EA /* CategoriesViewController.swift in Sources */,
+				489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */,
 				489B44501CD3C137003208EA /* Bill.swift in Sources */,
 				489B444E1CD3C065003208EA /* SubCategory.swift in Sources */,
 				489B44201CD37C08003208EA /* AppDelegate.swift in Sources */,

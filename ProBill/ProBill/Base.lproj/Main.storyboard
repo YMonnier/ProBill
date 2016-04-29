@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Categories View Controller-->
@@ -21,28 +22,49 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="30" id="dpZ-AQ-Ujs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CatCell" rowHeight="30" id="dpZ-AQ-Ujs" customClass="CategoriesCellView" customModule="ProBill" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpZ-AQ-Ujs" id="GPe-uN-Kly">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlA-hX-tmC">
+                                                    <rect key="frame" x="8" y="4" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mlA-hX-tmC" firstAttribute="trailing" secondItem="GPe-uN-Kly" secondAttribute="trailingMargin" id="GP4-AH-hNW"/>
+                                                <constraint firstItem="mlA-hX-tmC" firstAttribute="leading" secondItem="GPe-uN-Kly" secondAttribute="leadingMargin" id="Lbj-Xj-3WW"/>
+                                                <constraint firstItem="mlA-hX-tmC" firstAttribute="centerY" secondItem="GPe-uN-Kly" secondAttribute="centerY" id="u31-ii-ORz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="mlA-hX-tmC" id="Iv2-vU-FeT"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ryS-Kj-F3k" id="B73-Tg-vGB"/>
+                                    <outlet property="delegate" destination="ryS-Kj-F3k" id="jgQ-4s-MYL"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rDI-n9-fUL" firstAttribute="bottom" secondItem="Keq-Ra-TCk" secondAttribute="top" id="ZTp-Nd-ibK"/>
-                            <constraint firstItem="rDI-n9-fUL" firstAttribute="leading" secondItem="flU-14-79H" secondAttribute="leading" id="cvQ-dD-3kF"/>
-                            <constraint firstItem="rDI-n9-fUL" firstAttribute="top" secondItem="ilY-Mb-15g" secondAttribute="bottom" id="iRt-gj-aTI"/>
-                            <constraint firstAttribute="trailing" secondItem="rDI-n9-fUL" secondAttribute="trailing" id="sxs-UI-S9m"/>
+                            <constraint firstItem="rDI-n9-fUL" firstAttribute="leading" secondItem="flU-14-79H" secondAttribute="leading" id="2cQ-am-Q5K"/>
+                            <constraint firstItem="rDI-n9-fUL" firstAttribute="top" secondItem="ilY-Mb-15g" secondAttribute="bottom" id="BJc-Jk-HJb"/>
+                            <constraint firstAttribute="trailing" secondItem="rDI-n9-fUL" secondAttribute="trailing" id="aBP-o0-LSy"/>
+                            <constraint firstItem="rDI-n9-fUL" firstAttribute="bottom" secondItem="Keq-Ra-TCk" secondAttribute="top" id="onX-MA-72E"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cQW-Ch-Ub3"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="McI-dd-Hq0" id="rTn-0S-dzL"/>
+                        <outlet property="tableView" destination="rDI-n9-fUL" id="52I-Uc-0Ep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2B-0X-Spd" userLabel="First Responder" sceneMemberID="firstResponder"/>
