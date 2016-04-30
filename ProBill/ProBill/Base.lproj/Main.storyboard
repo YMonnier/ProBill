@@ -347,6 +347,7 @@
                     <connections>
                         <outlet property="collectionView" destination="gMp-k6-9uA" id="FCk-YN-Fht"/>
                         <outlet property="searchDisplayController" destination="rQs-b8-CQa" id="y70-hw-kSX"/>
+                        <segue destination="r1w-C6-Ywi" kind="show" id="hd9-iq-c8n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -407,9 +408,6 @@
                                     <action selector="takePictureAction:" destination="IPz-Fc-CDS" eventType="touchUpInside" id="t0q-Ow-gbp"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FZH-1f-2kV">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FbW-En-Oai">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
@@ -449,6 +447,9 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FZH-1f-2kV">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -475,9 +476,9 @@
                                 <exclude reference="TsP-rR-OKJ"/>
                                 <exclude reference="1n3-fK-tis"/>
                                 <exclude reference="N2b-hT-4jU"/>
-                                <exclude reference="FZH-1f-2kV"/>
                                 <exclude reference="FbW-En-Oai"/>
                                 <exclude reference="9TE-xq-cn9"/>
+                                <exclude reference="FZH-1f-2kV"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="P23-NO-qpA"/>
@@ -504,9 +505,9 @@
                                 <include reference="TsP-rR-OKJ"/>
                                 <include reference="1n3-fK-tis"/>
                                 <include reference="N2b-hT-4jU"/>
-                                <include reference="FZH-1f-2kV"/>
                                 <include reference="FbW-En-Oai"/>
                                 <include reference="9TE-xq-cn9"/>
+                                <include reference="FZH-1f-2kV"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="P23-NO-qpA"/>
@@ -541,6 +542,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Si-aL-aiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2199" y="153"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gqR-P5-bho">
+            <objects>
+                <viewController id="r1w-C6-Ywi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6fA-Gc-xAL"/>
+                        <viewControllerLayoutGuide type="bottom" id="SQE-Xm-tPh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jbv-2f-nIr">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BHe-4o-D2C">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="455"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZE-XV-bID">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="522" width="360" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="BHe-4o-D2C"/>
+                                <exclude reference="cZE-XV-bID"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="BHe-4o-D2C"/>
+                                <include reference="cZE-XV-bID"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nUG-Fs-PMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1458" y="-557"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="GSA-eF-KmB">
