@@ -32,6 +32,10 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         self.title = "Your bill"
         
+        //Right button (save bill)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddBillViewController.saveBill))
+        self.navigationItem.rightBarButtonItem = doneButton
+        
         //TextField
         self.categoryTextField.delegate = self
         self.subCategoryTextField.delegate = self
@@ -56,6 +60,22 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func textFieldDidBeginEditing(textField: UITextField) { // became first responder
         print("activeTextField")
         self.activeTextField = textField
+        switch textField {
+        case self.categoryTextField:
+            if !self.data.isEmpty {
+                self.categoryPickerView.selectedRowInComponent(0)
+                self.pickerView(self.categoryPickerView, didSelectRow: 0, inComponent: 0)
+            }
+            break
+        case self.subCategoryTextField:
+            if !self.subCatData.isEmpty {
+                self.subCategoryPickerView.selectedRowInComponent(0)
+                self.pickerView(self.subCategoryPickerView, didSelectRow: 0, inComponent: 0)
+            }
+            break
+        default:
+            return
+        }
     }
     
     /**
@@ -182,15 +202,27 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         autoreleasepool {
+            
             switch pickerView {
             case self.categoryPickerView:
+                print("categoryPickerView:: \(row)")
+                self.categoryTextField.text = self.data[row].name
                 self.subCatData = Array(self.data[row].subCategories)
+                print("categoryPickerView:: END")
+                break
+            case self.subCategoryPickerView:
+                self.subCategoryTextField.text = self.subCatData[row].name
                 break
             default:
                 return
             }
             
         }
+    }
+    
+    //MARK: - Save Action
+    func saveBill() {
+        
     }
     
     //MARK: - LoadData
@@ -203,8 +235,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             var result: [AnyObject]?
             
             let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
-            //let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
-            //fetch.predicate = predicate
+            
             do {
                 result = try self.managedObjectContext!.executeFetchRequest(fetch)
             } catch let nserror1 as NSError{

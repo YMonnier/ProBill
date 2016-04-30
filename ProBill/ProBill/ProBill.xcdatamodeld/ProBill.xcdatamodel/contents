@@ -8,12 +8,12 @@
     </entity>
     <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="subcategories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubCategory" inverseName="category" inverseEntity="SubCategory" syncable="YES"/>
+        <relationship name="subCategories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubCategory" inverseName="category" inverseEntity="SubCategory" syncable="YES"/>
     </entity>
     <entity name="SubCategory" representedClassName="SubCategory" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="bills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bill" inverseName="subCategory" inverseEntity="Bill" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subcategories" inverseEntity="Category" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subCategories" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="-54" positionY="-9" width="128" height="75"/>

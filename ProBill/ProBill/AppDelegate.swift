@@ -47,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var error: NSError? = nil
         var result: [AnyObject]?
         
-        let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
-        let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
-        fetch.predicate = predicate
+        let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+        //let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
+        //fetch.predicate = predicate
         do {
             result = try self.managedObjectContext.executeFetchRequest(fetch)
         } catch let nserror1 as NSError{
@@ -58,9 +58,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         for resultItem in result! {
-            let catObject = resultItem as! SubCategory
-            NSLog("Fetched SubCategory for \(catObject.name) ")
-            NSLog("Fetched Category for \(catObject.category.name) ")
+            let catObject = resultItem as! Category
+            NSLog("Fetched category for \(catObject.name) ")
+            
+            NSLog("Loop on subCat")
+            for sCat in catObject.subCategories {
+                NSLog("subCar :: \(sCat.name))")
+            }
+            
+            NSLog("Try convert to array...")
+            let subCats = Array(catObject.subCategories)
+            NSLog("END END... \(subCats)")
+            //NSLog("Fetched Category for \(catObject.category.name) ")
             /*for subCat in catObject. {
                 NSLog("\(subCat)")
             }*/
