@@ -1,4 +1,5 @@
 # ProBill
+![Platform iOS](https://img.shields.io/badge/platform-iOS-blue.svg)
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![License](https://img.shields.io/cocoapods/l/Ouroboros.svg?style=flat)](https://github.com/YMonnier/ProBill/blob/master/LICENSE)
 
@@ -13,10 +14,14 @@ Preview
 
 Features
 --------
-+ CoreData (**NSFetchedResultsController**, **insert**, **delete**)
++ CoreData (**NSFetchedResultsController**, **Insert**, **Delete**, **Relationship**)
 + UITableView
++ UIPickerView
++ UIDatePiker
++ UIImagePickerController
 + UICollectionView
-+ Search Control
++ UISearchBar
++ xib View
 
 Todo
 ----
