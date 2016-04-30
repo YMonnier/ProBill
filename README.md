@@ -1,7 +1,7 @@
 # ProBill
 ![Platform iOS](https://img.shields.io/badge/platform-iOS-blue.svg)
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![CI Status](https://travis-ci.org/YMonnier/ProBill.svg?branch=master)](https://travis-ci.org/YMonnier/BillPro)
+[![CI Status](https://travis-ci.org/YMonnier/ProBill.svg?branch=master)](https://travis-ci.org/YMonnier/ProBill)
 [![License](https://img.shields.io/cocoapods/l/Ouroboros.svg?style=flat)](https://github.com/YMonnier/ProBill/blob/master/LICENSE)
 
 ProBill is an open source application written in Swift. This application allow you to save your bills by taking a photo.
@@ -26,7 +26,7 @@ Features
 
 Todo
 ----
-+ Search Control for UIViewController
++ Search Control for UICollectionView
 + Share Bill (export PDF File or Web API)
 
 License
