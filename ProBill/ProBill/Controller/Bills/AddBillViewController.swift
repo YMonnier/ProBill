@@ -26,6 +26,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var managedObjectContext: NSManagedObjectContext? = nil
     var data: [Category] = []
     var subCatData: [SubCategory] = []
+    var subCategorieSelected: SubCategory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.title = "Your bill"
         
         //Right button (save bill)
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddBillViewController.saveBill))
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: #selector(AddBillViewController.saveBill))
         self.navigationItem.rightBarButtonItem = doneButton
         
         //TextField
@@ -212,6 +213,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 break
             case self.subCategoryPickerView:
                 self.subCategoryTextField.text = self.subCatData[row].name
+                self.subCategorieSelected = self.subCatData[row]
                 break
             default:
                 return
@@ -222,7 +224,11 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - Save Action
     func saveBill() {
-        
+        if self.subCategorieSelected != nil && !self.dateTextField.text!.isEmpty {
+            print("Save OK...")
+        } else {
+            print("Errer save")
+        }
     }
     
     //MARK: - LoadData
