@@ -20,7 +20,13 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Sub Categories\nTest"
+        //Title
+        let label = UILabel(frame: CGRectMake(0, 0, 440, 44))
+        label.backgroundColor = UIColor.clearColor()
+        label.numberOfLines = 0
+        label.textAlignment = NSTextAlignment.Center
+        label.text = self.category!.name + "\nSub Category"
+        self.navigationItem.titleView = label
         
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
