@@ -7,3 +7,21 @@
 //
 
 import Foundation
+import UIKit
+
+class BillDetailViewController: UIViewController {
+    @IBOutlet weak var picture: UIImageView!
+    
+    @IBOutlet weak var price: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+}
