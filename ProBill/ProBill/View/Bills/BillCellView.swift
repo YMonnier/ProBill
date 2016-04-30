@@ -12,10 +12,10 @@ import UIKit
 class BillCellView: UICollectionViewCell{
     @IBOutlet weak var picture: UIImageView!
     
-    @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.borderWidth = 2
         self.layer.borderColor = PBColor.blue.CGColor
+        self.layer.cornerRadius = 10
     }
 }

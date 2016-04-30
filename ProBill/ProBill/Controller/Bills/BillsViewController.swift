@@ -45,6 +45,11 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.loadData()
+        self.collectionView.reloadData()
+    }
+    
     //MARK: - UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -66,8 +71,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         let bill: Bill = Array(self.data[indexPath.section].bills)[indexPath.row]
         //cell.backgroundColor = UIColor.clearColor()
 
-        cell.picture.image = UIImage(CGImage: UIImage(data: bill.picture)!.CGImage!,scale: 1.0,orientation: .Right)
-        cell.label.text = "\(indexPath.section);\(indexPath.row)"
+        cell.picture.image = UIImage(data: bill.picture)
         return cell
     }
     
@@ -87,9 +91,9 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         print("ICI")
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionElementKindSectionHeader && !self.data[indexPath.section].bills.isEmpty {
             let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader, forIndexPath: indexPath) as! BillHeaderView
-            header.title.text = "\(indexPath.row)"
+            header.title.text = self.data[indexPath.section].name
             return header;
         }
         print("ONONONON")
@@ -115,9 +119,13 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
                 result = nil
             }
             if result != nil {
-                self.data = result as! [SubCategory]
+                self.data = []
+                self.data = (result as! [SubCategory]).filter({ (sc) -> Bool in
+                    !sc.bills.isEmpty
+                })
+                
+                
             }
         }
-
     }
 }

@@ -15,7 +15,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //ImagePciker
     var imagePicker: UIImagePickerController!
     @IBOutlet weak var takePictureButton: UIButton!
-
+    
     //TextField
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var subCategoryTextField: UITextField!
@@ -80,12 +80,16 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             if !self.data.isEmpty {
                 self.categoryPickerView.selectedRowInComponent(0)
                 self.pickerView(self.categoryPickerView, didSelectRow: 0, inComponent: 0)
+            } else {
+                self.showSimpleAlert("Your bill", message: "There are no categories.")
             }
             break
         case self.subCategoryTextField:
             if !self.subCatData.isEmpty {
                 self.subCategoryPickerView.selectedRowInComponent(0)
                 self.pickerView(self.subCategoryPickerView, didSelectRow: 0, inComponent: 0)
+            } else {
+                self.showSimpleAlert("Your bill", message: "There are no sub category.")
             }
             break
         default:
@@ -220,14 +224,16 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         autoreleasepool {
             switch pickerView {
             case self.categoryPickerView:
-                print("categoryPickerView:: \(row)")
-                self.categoryTextField.text = self.data[row].name
-                self.subCatData = Array(self.data[row].subCategories)
-                print("categoryPickerView:: END")
+                if !self.data.isEmpty {
+                    self.categoryTextField.text = self.data[row].name
+                    self.subCatData = Array(self.data[row].subCategories)
+                }
                 break
             case self.subCategoryPickerView:
-                self.subCategoryTextField.text = self.subCatData[row].name
-                self.subCategorieSelected = self.subCatData[row]
+                if !self.subCatData.isEmpty {
+                    self.subCategoryTextField.text = self.subCatData[row].name
+                    self.subCategorieSelected = self.subCatData[row]
+                }
                 break
             default:
                 return
@@ -238,8 +244,8 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - Picture
     /**
-        Initilize picture button (Design)
-    */
+     Initilize picture button (Design)
+     */
     private func initPictureButton() {
         self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
         self.takePictureButton.layer.borderWidth = 3.0
@@ -258,8 +264,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //Delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        self.picture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        //UIImagePNGRepresentation(<#T##image: UIImage##UIImage#>)
+        let imageFromCamera = (info[UIImagePickerControllerOriginalImage] as? UIImage)
+        imageFromCamera!.fixOrientation()
+        self.picture.image = imageFromCamera//UIImage(CGImage: imageFromCamera!.CGImage!,scale: 1.0,orientation: .Right)
     }
     
     
@@ -270,13 +277,10 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
             bill.date = self.dateSelected!
             bill.picture = UIImagePNGRepresentation(self.picture.image!)!
-            print("OKOK")
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
             bill.subCategory = self.subCategorieSelected!
-            print("OKOK")
             do {
                 try self.managedObjectContext?.save()
-                print("Save OK...")
                 self.navigationController?.popViewControllerAnimated(true)
             } catch let error as NSError {
                 print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
