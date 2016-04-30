@@ -18,6 +18,7 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
@@ -102,37 +103,40 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     
     
     private func configureCell(cell: CategoriesCellView, atIndexPath indexPath: NSIndexPath) {
-        let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
+        let object: SubCategory = self.fetchedResultsController.objectAtIndexPath(indexPath) as! SubCategory
         cell.name.text = "\(object.name)"
     }
     
     //MARK: - Fetch Control
     
     var fetchedResultsController: NSFetchedResultsController {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
+        print("fetchedResultsController")
+        if self._fetchedResultsController != nil {
+            print("ALREADY EXISTS")
+            return self._fetchedResultsController!
         }
         
         let fetchRequest = NSFetchRequest()
         let entity = NSEntityDescription.entityForName("SubCategory", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
-        fetchRequest.predicate = NSPredicate(format: "category.name == '%@'", self.category!.name)
+        print("NSPREDICATE :: \(self.category!.name)")
+        fetchRequest.predicate = NSPredicate(format: "category.name = %@", self.category!.name)
 
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: "SubCategorie")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: nil)
         aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
+        self._fetchedResultsController = aFetchedResultsController
         
         do {
-            try _fetchedResultsController!.performFetch()
+            try self._fetchedResultsController!.performFetch()
         } catch {
             //print("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
-        return _fetchedResultsController!
+        return self._fetchedResultsController!
     }
     var _fetchedResultsController: NSFetchedResultsController? = nil
     

@@ -196,8 +196,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="ryS-Kj-F3k" id="7vE-G4-jbQ"/>
-                                    <outlet property="delegate" destination="ryS-Kj-F3k" id="cpK-sz-izJ"/>
+                                    <outlet property="dataSource" destination="tSu-i5-yhK" id="l9t-kw-f9q"/>
+                                    <outlet property="delegate" destination="tSu-i5-yhK" id="2Yt-f2-AGJ"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -260,7 +260,7 @@
             </objects>
             <point key="canvasLocation" x="2394" y="814"/>
         </scene>
-        <!--Bills View Controller-->
+        <!--Bills-->
         <scene sceneID="l7u-Ih-O2H">
             <objects>
                 <viewController id="zc7-95-z8W" customClass="BillsViewController" customModule="ProBill" customModuleProvider="target" sceneMemberID="viewController">
@@ -288,7 +288,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="N8i-RT-AeF"/>
+                    <navigationItem key="navigationItem" title="Bills" id="N8i-RT-AeF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

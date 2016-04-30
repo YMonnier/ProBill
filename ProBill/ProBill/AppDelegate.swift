@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //self.insert()
-        //self.fetch()
+        self.fetch()
         
         return true
     }
@@ -47,8 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var error: NSError? = nil
         var result: [AnyObject]?
         
-        let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
-        
+        let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
+        let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
+        fetch.predicate = predicate
         do {
             result = try self.managedObjectContext.executeFetchRequest(fetch)
         } catch let nserror1 as NSError{
@@ -57,11 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         for resultItem in result! {
-            let catObject = resultItem as! Category
-            NSLog("Fetched Category for \(catObject.name) ")
-            for subCat in catObject.subCategories {
+            let catObject = resultItem as! SubCategory
+            NSLog("Fetched SubCategory for \(catObject.name) ")
+            NSLog("Fetched Category for \(catObject.category.name) ")
+            /*for subCat in catObject. {
                 NSLog("\(subCat)")
-            }
+            }*/
             
             //    self.managedObjectContext.deleteObject(catObject)
         }

@@ -63,10 +63,10 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showSubCat" {
+        if segue.identifier == "ShowSubCat" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! SubCategoriesViewController
+                let controller = segue.destinationViewController as! SubCategoriesViewController
                 controller.category = object
             }
         }
@@ -124,10 +124,10 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: "Category")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "name", cacheName: nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
