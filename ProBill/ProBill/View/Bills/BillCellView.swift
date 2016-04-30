@@ -10,12 +10,18 @@ import Foundation
 import UIKit
 
 class BillCellView: UICollectionViewCell{
+    
+    @IBOutlet weak var overlay: UIView!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var date: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.borderWidth = 2
         self.layer.borderColor = PBColor.blue.CGColor
         self.layer.cornerRadius = 10
+        
+        self.overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
     }
 }
