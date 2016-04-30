@@ -15,14 +15,14 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var tableView: UITableView!
     var category: Category?
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Sub Categories\nTest"
         
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -35,6 +35,7 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         let alert = UIAlertController(title: "Sub Categories", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
             textField.placeholder = "Your sub category"
+            textField.autocapitalizationType = .Sentences
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
@@ -114,7 +115,7 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         let entity = NSEntityDescription.entityForName("SubCategory", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         fetchRequest.predicate = NSPredicate(format: "category.name = %@", self.category!.name)
-
+        
         
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]

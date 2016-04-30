@@ -81,7 +81,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 self.categoryPickerView.selectedRowInComponent(0)
                 self.pickerView(self.categoryPickerView, didSelectRow: 0, inComponent: 0)
             } else {
-                self.showSimpleAlert("Your bill", message: "There are no categories.")
+                self.showSimpleAlert("Your bill", message: "There are no categories.c")
             }
             break
         case self.subCategoryTextField:

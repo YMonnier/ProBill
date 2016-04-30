@@ -33,6 +33,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         let alert = UIAlertController(title: "Categories", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
             textField.placeholder = "Your category"
+            textField.autocapitalizationType = .Sentences
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
@@ -50,7 +51,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             } catch {
                 abort()
             }
-
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) in
@@ -109,7 +110,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
-
+    
     
     private func configureCell(cell: CategoriesCellView, atIndexPath indexPath: NSIndexPath) {
         let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
@@ -122,7 +123,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
-
+        
         let fetchRequest = NSFetchRequest()
         let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
