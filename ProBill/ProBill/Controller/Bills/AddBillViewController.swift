@@ -11,7 +11,8 @@ import UIKit
 import CoreData
 
 class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-    
+    @IBOutlet weak var takePictureButton: UIButton!
+
     //TextField
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var subCategoryTextField: UITextField!
@@ -23,10 +24,15 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let subCategoryPickerView: UIPickerView = UIPickerView()
     let datePickerView:UIDatePicker = UIDatePicker()
     
-    var managedObjectContext: NSManagedObjectContext? = nil
+    //Save info
+    var subCategorieSelected: SubCategory?
+    var dateSelected: NSDate?
+
+    //Data
     var data: [Category] = []
     var subCatData: [SubCategory] = []
-    var subCategorieSelected: SubCategory?
+    
+    var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +52,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.initCategoryPicker()
         self.initSubCategoryPicker()
         self.initDatePicker()
+        
+        //PictureButton
+        self.initPictureButton()
         
         self.loadData()
     }
@@ -122,10 +131,10 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         datePickerView.addTarget(self, action: #selector(AddBillViewController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         
         let toolBar: UIToolbar = self.createToolBar()
+        toolBar
         self.datePickerView.frame = CGRectMake(0, 0, 500, 250)
         self.dateTextField.inputAccessoryView = toolBar
         self.dateTextField.inputView = self.datePickerView
-        
     }
     
     /**
@@ -137,6 +146,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         dateTextField.text = dateFormatter.stringFromDate(sender.date)
+        self.dateSelected = sender.date
     }
     
     //MARK: - UIPickerView
@@ -222,9 +232,23 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
     
+    //MARK: - Picture
+    
+    private func initPictureButton() {
+        self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
+        self.takePictureButton.layer.borderWidth = 3.0
+        self.takePictureButton.layer.borderColor = PBColor.gray.CGColor
+
+    }
+    
+    @IBAction func takePictureAction(sender: UIButton) {
+        print("takePicture")
+        sender.highlighted = true
+    }
+    
     //MARK: - Save Action
     func saveBill() {
-        if self.subCategorieSelected != nil && !self.dateTextField.text!.isEmpty {
+        if self.subCategorieSelected != nil && self.dateSelected != nil {
             print("Save OK...")
         } else {
             print("Errer save")

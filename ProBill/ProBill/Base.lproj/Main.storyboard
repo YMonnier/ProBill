@@ -326,6 +326,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2b-hT-4jU">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.87058823529411766" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="DMQ-wF-uAb"/>
+                                    <constraint firstAttribute="height" constant="60" id="M3y-6O-iZf"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DMQ-wF-uAb"/>
+                                        <exclude reference="M3y-6O-iZf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="DMQ-wF-uAb"/>
+                                        <include reference="M3y-6O-iZf"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="takePictureAction:" destination="IPz-Fc-CDS" eventType="touchUpInside" id="t0q-Ow-gbp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -333,7 +356,9 @@
                             <constraint firstItem="1n3-fK-tis" firstAttribute="top" secondItem="TsP-rR-OKJ" secondAttribute="bottom" constant="8" symbolic="YES" id="6gg-r0-oGq"/>
                             <constraint firstItem="1n3-fK-tis" firstAttribute="leading" secondItem="9TE-xq-cn9" secondAttribute="leading" id="Kbn-os-Mmc"/>
                             <constraint firstItem="9TE-xq-cn9" firstAttribute="top" secondItem="1n3-fK-tis" secondAttribute="bottom" constant="8" symbolic="YES" id="Lyc-kM-Nqy"/>
+                            <constraint firstItem="oBI-kU-JqW" firstAttribute="top" secondItem="N2b-hT-4jU" secondAttribute="bottom" constant="8" symbolic="YES" id="P23-NO-qpA"/>
                             <constraint firstItem="TsP-rR-OKJ" firstAttribute="leading" secondItem="jOy-Ly-OuE" secondAttribute="leadingMargin" id="Zqh-2d-cMf"/>
+                            <constraint firstItem="N2b-hT-4jU" firstAttribute="centerX" secondItem="9TE-xq-cn9" secondAttribute="centerX" id="bH1-IF-rL9"/>
                             <constraint firstItem="TsP-rR-OKJ" firstAttribute="trailing" secondItem="jOy-Ly-OuE" secondAttribute="trailingMargin" id="cGT-Gi-kQy"/>
                             <constraint firstItem="1n3-fK-tis" firstAttribute="trailing" secondItem="9TE-xq-cn9" secondAttribute="trailing" id="lnF-wd-JhG"/>
                             <constraint firstItem="TsP-rR-OKJ" firstAttribute="trailing" secondItem="1n3-fK-tis" secondAttribute="trailing" id="n3o-Sq-Rzv"/>
@@ -344,6 +369,7 @@
                                 <exclude reference="TsP-rR-OKJ"/>
                                 <exclude reference="1n3-fK-tis"/>
                                 <exclude reference="9TE-xq-cn9"/>
+                                <exclude reference="N2b-hT-4jU"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3bH-4P-XBo"/>
@@ -355,6 +381,8 @@
                                 <exclude reference="Kbn-os-Mmc"/>
                                 <exclude reference="lnF-wd-JhG"/>
                                 <exclude reference="Lyc-kM-Nqy"/>
+                                <exclude reference="bH1-IF-rL9"/>
+                                <exclude reference="P23-NO-qpA"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -362,6 +390,7 @@
                                 <include reference="TsP-rR-OKJ"/>
                                 <include reference="1n3-fK-tis"/>
                                 <include reference="9TE-xq-cn9"/>
+                                <include reference="N2b-hT-4jU"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="3bH-4P-XBo"/>
@@ -373,6 +402,8 @@
                                 <include reference="Kbn-os-Mmc"/>
                                 <include reference="lnF-wd-JhG"/>
                                 <include reference="Lyc-kM-Nqy"/>
+                                <include reference="bH1-IF-rL9"/>
+                                <include reference="P23-NO-qpA"/>
                             </mask>
                         </variation>
                     </view>
@@ -380,6 +411,7 @@
                         <outlet property="categoryTextField" destination="TsP-rR-OKJ" id="5MH-zj-4xq"/>
                         <outlet property="dateTextField" destination="9TE-xq-cn9" id="2MG-FX-O1V"/>
                         <outlet property="subCategoryTextField" destination="1n3-fK-tis" id="EBe-nm-Cu5"/>
+                        <outlet property="takePictureButton" destination="N2b-hT-4jU" id="v5c-tK-pwp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Si-aL-aiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
