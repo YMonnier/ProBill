@@ -347,7 +347,7 @@
                     <connections>
                         <outlet property="collectionView" destination="gMp-k6-9uA" id="FCk-YN-Fht"/>
                         <outlet property="searchDisplayController" destination="rQs-b8-CQa" id="y70-hw-kSX"/>
-                        <segue destination="r1w-C6-Ywi" kind="show" id="hd9-iq-c8n"/>
+                        <segue destination="r1w-C6-Ywi" kind="show" identifier="DetailSegue" id="hd9-iq-c8n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>

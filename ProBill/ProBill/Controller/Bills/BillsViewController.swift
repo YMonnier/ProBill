@@ -17,6 +17,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     let reuseIdentifierHeader = "BillHeader"
     
     var managedObjectContext: NSManagedObjectContext? = nil
+    var billSegue: Bill? = nil
 
     //Data
     var data: [SubCategory] = []
@@ -50,6 +51,15 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.collectionView.reloadData()
     }
     
+    //MARK:- Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DetailSegue" {
+            let destinationController = segue.destinationViewController as! BillDetailViewController
+            destinationController.bill = self.billSegue
+        }
+    }
+    
     //MARK: - UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -78,7 +88,8 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BillCellView
+        self.billSegue = Array(self.data[indexPath.section].bills)[indexPath.row]
+        self.performSegueWithIdentifier("DetailSegue", sender: self)
     }
     
     

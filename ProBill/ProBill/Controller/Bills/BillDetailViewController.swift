@@ -11,12 +11,12 @@ import UIKit
 
 class BillDetailViewController: UIViewController {
     @IBOutlet weak var picture: UIImageView!
-    
     @IBOutlet weak var price: UILabel!
+    
+    var bill: Bill?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {
