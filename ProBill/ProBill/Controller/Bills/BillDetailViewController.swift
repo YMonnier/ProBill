@@ -44,13 +44,20 @@ class BillDetailViewController: UIViewController {
     }
     
     func deleteObject(sender: AnyObject) {
-        self.managedObjectContext!.deleteObject(self.bill!)
-        do {
-            try self.managedObjectContext!.save()
-        } catch let error as NSError {
-            print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
-        }
-        self.navigationController?.popViewControllerAnimated(true)
+        let alert = UIAlertController(title: "Your Bill", message: "Are you sure to delete this bill?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action) -> Void in
+            self.managedObjectContext!.deleteObject(self.bill!)
+            do {
+                try self.managedObjectContext!.save()
+            } catch let error as NSError {
+                print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action) in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func shareObject(sender: AnyObject) {
