@@ -272,6 +272,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             bill.picture = UIImagePNGRepresentation(self.picture.image!)!
             print("OKOK")
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
+            bill.subCategory = self.subCategorieSelected!
             print("OKOK")
             do {
                 try self.managedObjectContext?.save()

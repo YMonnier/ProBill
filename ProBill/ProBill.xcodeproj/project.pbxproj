@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */; };
 		4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE81CD4B209001556F4 /* GlobalExtension.swift */; };
+		4814CEEB1CD4F1A5001556F4 /* BillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4814CEEA1CD4F1A5001556F4 /* BillCell.xib */; };
+		4814CEED1CD4F1B2001556F4 /* BillHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */; };
+		4814CEEF1CD4F1D1001556F4 /* BillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */; };
+		4814CEF11CD4F1DC001556F4 /* BillHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */; };
 		489B44201CD37C08003208EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B441F1CD37C08003208EA /* AppDelegate.swift */; };
 		489B44251CD37C08003208EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B44231CD37C08003208EA /* Main.storyboard */; };
 		489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 489B44261CD37C08003208EA /* ProBill.xcdatamodeld */; };
@@ -37,6 +41,10 @@
 /* Begin PBXFileReference section */
 		4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
 		4814CEE81CD4B209001556F4 /* GlobalExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
+		4814CEEA1CD4F1A5001556F4 /* BillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
+		4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillHeader.xib; sourceTree = "<group>"; };
+		4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillCellView.swift; sourceTree = "<group>"; };
+		4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillHeaderView.swift; sourceTree = "<group>"; };
 		489B441C1CD37C08003208EA /* ProBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489B441F1CD37C08003208EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		489B44241CD37C08003208EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -167,6 +175,10 @@
 		489B44531CD3D568003208EA /* Bills */ = {
 			isa = PBXGroup;
 			children = (
+				4814CEEA1CD4F1A5001556F4 /* BillCell.xib */,
+				4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */,
+				4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */,
+				4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */,
 			);
 			path = Bills;
 			sourceTree = "<group>";
@@ -260,8 +272,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4814CEEB1CD4F1A5001556F4 /* BillCell.xib in Resources */,
 				489B442D1CD37C08003208EA /* LaunchScreen.storyboard in Resources */,
 				489B442A1CD37C08003208EA /* Assets.xcassets in Resources */,
+				4814CEED1CD4F1B2001556F4 /* BillHeader.xib in Resources */,
 				489B44251CD37C08003208EA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +297,7 @@
 				489B44481CD3B6A2003208EA /* BillsViewController.swift in Sources */,
 				489B444C1CD3BF29003208EA /* Category.swift in Sources */,
 				489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */,
+				4814CEEF1CD4F1D1001556F4 /* BillCellView.swift in Sources */,
 				489B444A1CD3B703003208EA /* CategoriesViewController.swift in Sources */,
 				489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */,
 				4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */,
@@ -290,6 +305,7 @@
 				489B444E1CD3C065003208EA /* SubCategory.swift in Sources */,
 				4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */,
 				489B44201CD37C08003208EA /* AppDelegate.swift in Sources */,
+				4814CEF11CD4F1DC001556F4 /* BillHeaderView.swift in Sources */,
 				489B44581CD3E26E003208EA /* SubCategoriesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

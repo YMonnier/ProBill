@@ -151,9 +151,10 @@
                                     <outlet property="delegate" destination="tSu-i5-yhK" id="vgO-s2-qKA"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-zu-pt2">
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-zu-pt2">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.25490196079999999" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CatCell" rowHeight="40" id="kBq-qb-QwM" customClass="CategoriesCellView" customModule="ProBill" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="40"/>
@@ -274,6 +275,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-k6-9uA">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I2v-EH-XOF">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -281,12 +283,58 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="487"/>
-                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="zc7-95-z8W" id="wSK-dt-zh8"/>
+                                    <outlet property="delegate" destination="zc7-95-z8W" id="e1T-GK-Nw7"/>
+                                </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-fO-HtL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="barTintColor" red="1" green="0.8980392157" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zc7-95-z8W" id="Z5c-Ht-y2p"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gMp-k6-9uA" firstAttribute="bottom" secondItem="kEj-QP-Pvu" secondAttribute="top" id="7ds-k5-rsm"/>
+                            <constraint firstItem="gMp-k6-9uA" firstAttribute="top" secondItem="Eea-fO-HtL" secondAttribute="bottom" id="J3w-zw-Zaj"/>
+                            <constraint firstItem="Eea-fO-HtL" firstAttribute="top" secondItem="pho-MT-Sfe" secondAttribute="bottom" id="Wzf-CT-aLr"/>
+                            <constraint firstItem="Eea-fO-HtL" firstAttribute="trailing" secondItem="gMp-k6-9uA" secondAttribute="trailing" id="cPH-e1-HsO"/>
+                            <constraint firstItem="Eea-fO-HtL" firstAttribute="leading" secondItem="gMp-k6-9uA" secondAttribute="leading" id="jTe-PO-wXg"/>
+                            <constraint firstAttribute="trailing" secondItem="Eea-fO-HtL" secondAttribute="trailing" id="tnn-bb-51v"/>
+                            <constraint firstItem="Eea-fO-HtL" firstAttribute="leading" secondItem="F1b-Sv-HkP" secondAttribute="leading" id="zNe-T9-YZB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Eea-fO-HtL"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Wzf-CT-aLr"/>
+                                <exclude reference="cPH-e1-HsO"/>
+                                <exclude reference="jTe-PO-wXg"/>
+                                <exclude reference="tnn-bb-51v"/>
+                                <exclude reference="zNe-T9-YZB"/>
+                                <exclude reference="7ds-k5-rsm"/>
+                                <exclude reference="J3w-zw-Zaj"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Eea-fO-HtL"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Wzf-CT-aLr"/>
+                                <include reference="cPH-e1-HsO"/>
+                                <include reference="jTe-PO-wXg"/>
+                                <include reference="tnn-bb-51v"/>
+                                <include reference="zNe-T9-YZB"/>
+                                <include reference="7ds-k5-rsm"/>
+                                <include reference="J3w-zw-Zaj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Bills" id="N8i-RT-AeF">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3SA-Yu-Qws">
@@ -295,8 +343,21 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="gMp-k6-9uA" id="FCk-YN-Fht"/>
+                        <outlet property="searchDisplayController" destination="rQs-b8-CQa" id="y70-hw-kSX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="rQs-b8-CQa">
+                    <connections>
+                        <outlet property="delegate" destination="zc7-95-z8W" id="8XC-aM-w2i"/>
+                        <outlet property="searchBar" destination="Eea-fO-HtL" id="UlY-2y-cnD"/>
+                        <outlet property="searchContentsController" destination="zc7-95-z8W" id="Gkd-20-fwm"/>
+                        <outlet property="searchResultsDataSource" destination="zc7-95-z8W" id="DQ3-iq-9Jt"/>
+                        <outlet property="searchResultsDelegate" destination="zc7-95-z8W" id="dkb-XB-rBF"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1458" y="153"/>
         </scene>
@@ -488,6 +549,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="1" green="0.89803921568627454" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="py5-5A-umk" kind="relationship" relationship="viewControllers" id="2pb-Ca-RBu"/>

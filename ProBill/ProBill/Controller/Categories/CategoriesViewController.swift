@@ -20,6 +20,9 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
+        
+        //Delete padding top
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func didReceiveMemoryWarning() {

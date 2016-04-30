@@ -11,6 +11,7 @@ import UIKit
 
 struct PBColor {
     static let yellow = UIColor(red: (255/255), green: (229/255), blue: (51/255), alpha: 1.0)
+    static let lightYellow = UIColor(red: (255/255), green: (247/255), blue: (153/255), alpha: 1.0)
     static let blue = UIColor(red: (79/255), green: (172/255), blue: (255/255), alpha: 1.0)
     static let orange = UIColor(red: (222/255), green: (138/255), blue: (0/255), alpha: 1.0)
     static let gray = UIColor(red: (74/255), green: (74/255), blue: (74/255), alpha: 1.0)
