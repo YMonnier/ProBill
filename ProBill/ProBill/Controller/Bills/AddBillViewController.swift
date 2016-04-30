@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
@@ -16,16 +17,19 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var subCategoryTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     var activeTextField:UITextField?
-
+    
     //PickerView
     let categoryPickerView: UIPickerView = UIPickerView()
     let subCategoryPickerView: UIPickerView = UIPickerView()
     let datePickerView:UIDatePicker = UIDatePicker()
-
+    
+    var managedObjectContext: NSManagedObjectContext? = nil
     var data: [Category] = []
+    var subCatData: [SubCategory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         self.title = "Your bill"
         
         //TextField
@@ -47,16 +51,16 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - TextField
     /**
-        selection active tectField
-    */
+     selection active tectField
+     */
     func textFieldDidBeginEditing(textField: UITextField) { // became first responder
         print("activeTextField")
         self.activeTextField = textField
     }
-
+    
     /**
-        dismiss inputView when user touch outside the view
-    */
+     dismiss inputView when user touch outside the view
+     */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
@@ -65,9 +69,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //MARK: - ToolBar (inputView)
     
     /**
-        Create toolbar with done button which dismiss the view
-        - returns: toolbar
-    */
+     Create toolbar with done button which dismiss the view
+     - returns: toolbar
+     */
     private func createToolBar() -> UIToolbar {
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         var items = [UIBarButtonItem]()
@@ -86,8 +90,8 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - UIDatePicker
     /**
-        Initilize DatePicker
-    */
+     Initilize DatePicker
+     */
     private func initDatePicker() {
         self.createToolBar()
         self.datePickerView.backgroundColor = UIColor.whiteColor()
@@ -100,12 +104,12 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.datePickerView.frame = CGRectMake(0, 0, 500, 250)
         self.dateTextField.inputAccessoryView = toolBar
         self.dateTextField.inputView = self.datePickerView
-
+        
     }
     
     /**
-        handler when date picker change value
-        - parameter sender: sender UIDatePicker
+     handler when date picker change value
+     - parameter sender: sender UIDatePicker
      */
     func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = NSDateFormatter()
@@ -116,7 +120,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - UIPickerView
     /**
-        Initilize CategoryPicker
+     Initilize CategoryPicker
      */
     private func initCategoryPicker() {
         self.categoryPickerView.backgroundColor = UIColor.whiteColor()
@@ -129,7 +133,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     /**
-        Initilize SubCategoryPicker
+     Initilize SubCategoryPicker
      */
     private func initSubCategoryPicker() {
         self.subCategoryPickerView.backgroundColor = UIColor.whiteColor()
@@ -140,9 +144,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.subCategoryTextField.inputAccessoryView = toolbar
         self.subCategoryTextField.inputView = self.subCategoryPickerView
     }
-
+    
     /**
-        dismiss inputView
+     dismiss inputView
      */
     func donePressed() {
         self.activeTextField?.resignFirstResponder()
@@ -155,12 +159,22 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 0
+        switch pickerView {
+        case self.categoryPickerView:
+            return self.data.count
+        case self.subCategoryPickerView:
+            return self.subCatData.count
+        default:
+            return 0
+        }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
-       
+        case self.categoryPickerView:
+            return self.data[row].name
+        case self.subCategoryPickerView:
+            return self.subCatData[row].name
         default:
             return ""
         }
@@ -168,17 +182,39 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         autoreleasepool {
-            
+            switch pickerView {
+            case self.categoryPickerView:
+                self.subCatData = Array(self.data[row].subCategories)
+                break
+            default:
+                return
+            }
             
         }
     }
     
     //MARK: - LoadData
     /**
-        fetch all categories and save it to use with PickerUse
-    */
+     fetch all categories and save it to use with PickerUse
+     */
     private func loadData() {
-        
+        autoreleasepool {
+            var error: NSError? = nil
+            var result: [AnyObject]?
+            
+            let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+            //let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
+            //fetch.predicate = predicate
+            do {
+                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+            } catch let nserror1 as NSError{
+                error = nserror1
+                result = nil
+            }
+            
+            if result != nil {
+                self.data = result as! [Category]
+            }
+        }
     }
-
 }
