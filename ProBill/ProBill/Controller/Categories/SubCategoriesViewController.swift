@@ -18,7 +18,9 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
+        
+        self.title = "Sub Categories\nTest"
+        
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
@@ -36,17 +38,11 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            print("TEST")
             let textField = alert.textFields![0] as UITextField
-            print("TEST")
             let subCategory = textField.text
-            print("TEST")
             let context = self.fetchedResultsController.managedObjectContext
-            print("TEST")
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            print("TEST")
             let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! SubCategory
-            print("TEST")
             newManagedObject.name = subCategory!
             newManagedObject.category = self.category!
             
@@ -110,16 +106,13 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     //MARK: - Fetch Control
     
     var fetchedResultsController: NSFetchedResultsController {
-        print("fetchedResultsController")
         if self._fetchedResultsController != nil {
-            print("ALREADY EXISTS")
             return self._fetchedResultsController!
         }
         
         let fetchRequest = NSFetchRequest()
         let entity = NSEntityDescription.entityForName("SubCategory", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
-        print("NSPREDICATE :: \(self.category!.name)")
         fetchRequest.predicate = NSPredicate(format: "category.name = %@", self.category!.name)
 
         

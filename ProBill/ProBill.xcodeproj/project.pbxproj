@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */; };
+		4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE81CD4B209001556F4 /* GlobalExtension.swift */; };
 		489B44201CD37C08003208EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B441F1CD37C08003208EA /* AppDelegate.swift */; };
 		489B44251CD37C08003208EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B44231CD37C08003208EA /* Main.storyboard */; };
 		489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 489B44261CD37C08003208EA /* ProBill.xcdatamodeld */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
+		4814CEE81CD4B209001556F4 /* GlobalExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		489B441C1CD37C08003208EA /* ProBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489B441F1CD37C08003208EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		489B44241CD37C08003208EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,15 +95,16 @@
 		489B441E1CD37C08003208EA /* ProBill */ = {
 			isa = PBXGroup;
 			children = (
+				489B441F1CD37C08003208EA /* AppDelegate.swift */,
+				489B44231CD37C08003208EA /* Main.storyboard */,
+				489B44261CD37C08003208EA /* ProBill.xcdatamodeld */,
 				489B44451CD3B5CE003208EA /* Model */,
 				489B44461CD3B5CE003208EA /* View */,
 				489B44421CD3B5CE003208EA /* Controller */,
-				489B441F1CD37C08003208EA /* AppDelegate.swift */,
-				489B44231CD37C08003208EA /* Main.storyboard */,
 				489B44291CD37C08003208EA /* Assets.xcassets */,
 				489B442B1CD37C08003208EA /* LaunchScreen.storyboard */,
 				489B442E1CD37C08003208EA /* Info.plist */,
-				489B44261CD37C08003208EA /* ProBill.xcdatamodeld */,
+				4814CEE81CD4B209001556F4 /* GlobalExtension.swift */,
 			);
 			path = ProBill;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				489B44471CD3B6A2003208EA /* BillsViewController.swift */,
+				4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */,
 			);
 			path = Bills;
 			sourceTree = "<group>";
@@ -279,8 +285,10 @@
 				489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */,
 				489B444A1CD3B703003208EA /* CategoriesViewController.swift in Sources */,
 				489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */,
+				4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */,
 				489B44501CD3C137003208EA /* Bill.swift in Sources */,
 				489B444E1CD3C065003208EA /* SubCategory.swift in Sources */,
+				4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */,
 				489B44201CD37C08003208EA /* AppDelegate.swift in Sources */,
 				489B44581CD3E26E003208EA /* SubCategoriesViewController.swift in Sources */,
 			);
@@ -472,6 +480,7 @@
 				489B443E1CD37C09003208EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		489B443F1CD37C09003208EA /* Build configuration list for PBXNativeTarget "ProBillTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +489,7 @@
 				489B44411CD37C09003208EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

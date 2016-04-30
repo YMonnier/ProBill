@@ -288,11 +288,103 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Bills" id="N8i-RT-AeF"/>
+                    <navigationItem key="navigationItem" title="Bills" id="N8i-RT-AeF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3SA-Yu-Qws">
+                            <connections>
+                                <segue destination="IPz-Fc-CDS" kind="show" id="A10-ma-zrv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1458" y="153"/>
+        </scene>
+        <!--Add Bill View Controller-->
+        <scene sceneID="P1f-bz-YVr">
+            <objects>
+                <viewController id="IPz-Fc-CDS" customClass="AddBillViewController" customModule="ProBill" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LYw-I2-NpN"/>
+                        <viewControllerLayoutGuide type="bottom" id="oBI-kU-JqW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jOy-Ly-OuE">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TsP-rR-OKJ">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sub category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1n3-fK-tis">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9TE-xq-cn9">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TsP-rR-OKJ" firstAttribute="leading" secondItem="1n3-fK-tis" secondAttribute="leading" id="3bH-4P-XBo"/>
+                            <constraint firstItem="1n3-fK-tis" firstAttribute="top" secondItem="TsP-rR-OKJ" secondAttribute="bottom" constant="8" symbolic="YES" id="6gg-r0-oGq"/>
+                            <constraint firstItem="1n3-fK-tis" firstAttribute="leading" secondItem="9TE-xq-cn9" secondAttribute="leading" id="Kbn-os-Mmc"/>
+                            <constraint firstItem="9TE-xq-cn9" firstAttribute="top" secondItem="1n3-fK-tis" secondAttribute="bottom" constant="8" symbolic="YES" id="Lyc-kM-Nqy"/>
+                            <constraint firstItem="TsP-rR-OKJ" firstAttribute="leading" secondItem="jOy-Ly-OuE" secondAttribute="leadingMargin" id="Zqh-2d-cMf"/>
+                            <constraint firstItem="TsP-rR-OKJ" firstAttribute="trailing" secondItem="jOy-Ly-OuE" secondAttribute="trailingMargin" id="cGT-Gi-kQy"/>
+                            <constraint firstItem="1n3-fK-tis" firstAttribute="trailing" secondItem="9TE-xq-cn9" secondAttribute="trailing" id="lnF-wd-JhG"/>
+                            <constraint firstItem="TsP-rR-OKJ" firstAttribute="trailing" secondItem="1n3-fK-tis" secondAttribute="trailing" id="n3o-Sq-Rzv"/>
+                            <constraint firstItem="TsP-rR-OKJ" firstAttribute="top" secondItem="LYw-I2-NpN" secondAttribute="bottom" constant="8" symbolic="YES" id="pOy-xT-VeU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="TsP-rR-OKJ"/>
+                                <exclude reference="1n3-fK-tis"/>
+                                <exclude reference="9TE-xq-cn9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3bH-4P-XBo"/>
+                                <exclude reference="Zqh-2d-cMf"/>
+                                <exclude reference="cGT-Gi-kQy"/>
+                                <exclude reference="n3o-Sq-Rzv"/>
+                                <exclude reference="pOy-xT-VeU"/>
+                                <exclude reference="6gg-r0-oGq"/>
+                                <exclude reference="Kbn-os-Mmc"/>
+                                <exclude reference="lnF-wd-JhG"/>
+                                <exclude reference="Lyc-kM-Nqy"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="TsP-rR-OKJ"/>
+                                <include reference="1n3-fK-tis"/>
+                                <include reference="9TE-xq-cn9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3bH-4P-XBo"/>
+                                <include reference="Zqh-2d-cMf"/>
+                                <include reference="cGT-Gi-kQy"/>
+                                <include reference="n3o-Sq-Rzv"/>
+                                <include reference="pOy-xT-VeU"/>
+                                <include reference="6gg-r0-oGq"/>
+                                <include reference="Kbn-os-Mmc"/>
+                                <include reference="lnF-wd-JhG"/>
+                                <include reference="Lyc-kM-Nqy"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="categoryTextField" destination="TsP-rR-OKJ" id="5MH-zj-4xq"/>
+                        <outlet property="dateTextField" destination="9TE-xq-cn9" id="2MG-FX-O1V"/>
+                        <outlet property="subCategoryTextField" destination="1n3-fK-tis" id="EBe-nm-Cu5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Si-aL-aiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2199" y="153"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="GSA-eF-KmB">
