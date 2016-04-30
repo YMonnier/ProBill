@@ -543,10 +543,10 @@
             </objects>
             <point key="canvasLocation" x="2199" y="153"/>
         </scene>
-        <!--View Controller-->
+        <!--Bill Detail View Controller-->
         <scene sceneID="gqR-P5-bho">
             <objects>
-                <viewController id="r1w-C6-Ywi" sceneMemberID="viewController">
+                <viewController id="r1w-C6-Ywi" customClass="BillDetailViewController" customModule="ProBill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6fA-Gc-xAL"/>
                         <viewControllerLayoutGuide type="bottom" id="SQE-Xm-tPh"/>
@@ -556,25 +556,37 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BHe-4o-D2C">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="455"/>
-                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZE-XV-bID">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="522" width="360" height="21"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BHe-4o-D2C" firstAttribute="centerX" secondItem="cZE-XV-bID" secondAttribute="centerX" id="7QS-Oj-n0x"/>
+                            <constraint firstItem="BHe-4o-D2C" firstAttribute="top" secondItem="6fA-Gc-xAL" secondAttribute="bottom" id="CZr-O9-fSj"/>
+                            <constraint firstItem="cZE-XV-bID" firstAttribute="top" secondItem="BHe-4o-D2C" secondAttribute="bottom" constant="3" id="D9G-Js-51j"/>
+                            <constraint firstAttribute="trailing" secondItem="BHe-4o-D2C" secondAttribute="trailing" id="eoR-7Z-FeU"/>
+                            <constraint firstItem="cZE-XV-bID" firstAttribute="leading" secondItem="jbv-2f-nIr" secondAttribute="leadingMargin" id="gqQ-Yz-GTT"/>
+                            <constraint firstItem="SQE-Xm-tPh" firstAttribute="top" secondItem="cZE-XV-bID" secondAttribute="bottom" constant="8" symbolic="YES" id="hUd-hr-qc5"/>
+                            <constraint firstItem="BHe-4o-D2C" firstAttribute="leading" secondItem="jbv-2f-nIr" secondAttribute="leading" id="jlI-g3-onc"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="BHe-4o-D2C"/>
                                 <exclude reference="cZE-XV-bID"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="7QS-Oj-n0x"/>
+                                <exclude reference="CZr-O9-fSj"/>
+                                <exclude reference="eoR-7Z-FeU"/>
+                                <exclude reference="jlI-g3-onc"/>
+                                <exclude reference="D9G-Js-51j"/>
+                                <exclude reference="gqQ-Yz-GTT"/>
+                                <exclude reference="hUd-hr-qc5"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -582,8 +594,21 @@
                                 <include reference="BHe-4o-D2C"/>
                                 <include reference="cZE-XV-bID"/>
                             </mask>
+                            <mask key="constraints">
+                                <include reference="7QS-Oj-n0x"/>
+                                <include reference="CZr-O9-fSj"/>
+                                <include reference="eoR-7Z-FeU"/>
+                                <include reference="jlI-g3-onc"/>
+                                <include reference="D9G-Js-51j"/>
+                                <include reference="gqQ-Yz-GTT"/>
+                                <include reference="hUd-hr-qc5"/>
+                            </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="picture" destination="BHe-4o-D2C" id="eSU-UX-LbE"/>
+                        <outlet property="price" destination="cZE-XV-bID" id="3Wp-NT-WSk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUG-Fs-PMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
