@@ -14,4 +14,5 @@ class SubCategory: NSManagedObject {
     //@NSManaged var id: Int
     @NSManaged var name: String
     @NSManaged var category: Category
+    @NSManaged var bills: Set<Bill>
 }

@@ -14,5 +14,5 @@ class Bill: NSManagedObject{
     @NSManaged var price: Double
     @NSManaged var picture: NSData
     @NSManaged var date: NSDate
-    @NSManaged var category: Category
+    @NSManaged var subCategory: SubCategory
 }
