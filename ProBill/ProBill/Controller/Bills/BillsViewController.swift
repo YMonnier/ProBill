@@ -72,7 +72,13 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         //cell.backgroundColor = UIColor.clearColor()
 
         cell.picture.image = UIImage(data: bill.picture)
+        cell.price.text = String(bill.price) + " Zl"
+        cell.date.text = bill.date.toString("yyyy-MM-dd")
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BillCellView
     }
     
     
@@ -82,11 +88,6 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         let rect = UIScreen.mainScreen().bounds
         let screenWidth = rect.size.width - 40
         return CGSizeMake(screenWidth/3, 160);
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-    {
-        return UIEdgeInsetsMake(10, 5, 10, 5); //top,left,bottom,right
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -100,8 +101,9 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         return UICollectionReusableView()
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BillCellView
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsetsMake(10, 5, 10, 5); //top,left,bottom,right
     }
     
     //MARK: - LoadData
