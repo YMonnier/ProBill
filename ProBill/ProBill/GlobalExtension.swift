@@ -19,6 +19,17 @@ struct PBColor {
     static let gray = UIColor(red: (74/255), green: (74/255), blue: (74/255), alpha: 1.0)
 }
 
+//MARK:- NSDate
+
+extension NSDate {
+    func toString(format: String) -> String {
+        let formatter: NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        return formatter.stringFromDate(self)
+    }
+}
+
 //MARK:- AlertViewController
 
 extension UIViewController {
