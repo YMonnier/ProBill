@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 import CoreData
 
-class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    //ImagePciker
+    var imagePicker: UIImagePickerController!
     @IBOutlet weak var takePictureButton: UIButton!
 
     //TextField
@@ -25,9 +28,11 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let datePickerView:UIDatePicker = UIDatePicker()
     
     //Save info
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var picture: UIImageView!
     var subCategorieSelected: SubCategory?
     var dateSelected: NSDate?
-
+    
     //Data
     var data: [Category] = []
     var subCatData: [SubCategory] = []
@@ -213,7 +218,6 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         autoreleasepool {
-            
             switch pickerView {
             case self.categoryPickerView:
                 print("categoryPickerView:: \(row)")
@@ -233,25 +237,53 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     //MARK: - Picture
-    
+    /**
+        Initilize picture button (Design)
+    */
     private func initPictureButton() {
         self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
         self.takePictureButton.layer.borderWidth = 3.0
         self.takePictureButton.layer.borderColor = PBColor.gray.CGColor
-
     }
     
     @IBAction func takePictureAction(sender: UIButton) {
         print("takePicture")
-        sender.highlighted = true
+        self.imagePicker =  UIImagePickerController()
+        self.imagePicker.delegate = self
+        self.imagePicker.sourceType = .Camera
+        
+        self.presentViewController(self.imagePicker, animated: true, completion: nil)
     }
+    
+    //Delegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        self.picture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        //UIImagePNGRepresentation(<#T##image: UIImage##UIImage#>)
+    }
+    
     
     //MARK: - Save Action
     func saveBill() {
-        if self.subCategorieSelected != nil && self.dateSelected != nil {
-            print("Save OK...")
+        print(#function)
+        if self.subCategorieSelected != nil && self.dateSelected != nil && self.picture.image != nil && !self.priceTextField.text!.isEmpty {
+            let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
+            bill.date = self.dateSelected!
+            bill.picture = UIImagePNGRepresentation(self.picture.image!)!
+            print("OKOK")
+            bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
+            print("OKOK")
+            do {
+                try self.managedObjectContext?.save()
+                print("Save OK...")
+                self.navigationController?.popViewControllerAnimated(true)
+            } catch let error as NSError {
+                print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+                self.showSimpleAlert("Add Bill", message: "Error in \(object_getClass(self)) \(#function): \(error.debugDescription))")
+            }
         } else {
-            print("Errer save")
+            print("Error save")
+            self.showSimpleAlert("Add Bill", message: "Error: please check if you have put all information.")
         }
     }
     

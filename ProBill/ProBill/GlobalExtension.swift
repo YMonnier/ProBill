@@ -15,3 +15,12 @@ struct PBColor {
     static let orange = UIColor(red: (222/255), green: (138/255), blue: (0/255), alpha: 1.0)
     static let gray = UIColor(red: (74/255), green: (74/255), blue: (74/255), alpha: 1.0)
 }
+
+extension UIViewController {
+    func showSimpleAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+}

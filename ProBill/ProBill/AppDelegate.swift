@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         self.saveContext()
-    
     }
     
     private func fetch() {
@@ -47,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var error: NSError? = nil
         var result: [AnyObject]?
         
-        let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+        let fetch: NSFetchRequest = NSFetchRequest(entityName: "Bill")
         //let predicate: NSPredicate = NSPredicate(format: "category.name = %@", "Car")
         //fetch.predicate = predicate
         do {
@@ -57,6 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             result = nil
         }
         
+        for item in result! {
+            let object = item as! Bill
+            NSLog("Object Bill :: \(object.price)")
+        }
+        
+        /*
         for resultItem in result! {
             let catObject = resultItem as! Category
             NSLog("Fetched category for \(catObject.name) ")
@@ -76,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //    self.managedObjectContext.deleteObject(catObject)
         }
+ */
     }
 
     func applicationWillResignActive(application: UIApplication) {
