@@ -28,6 +28,32 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func showLoader() -> UIView {
+        let activityLoader: UIActivityIndicatorView = UIActivityIndicatorView()
+        let container: UIView = UIView()
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let origin = CGPoint(x: (self.view.frame.size.width / 2) - 50, y: (self.view.frame.size.height / 2) - 50)
+        let size = CGSize(width: 100, height: 100)
+        
+        container.frame = CGRect(origin: origin, size: size)
+        container.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
+        container.layer.cornerRadius = 10
+        self.view.addSubview(container)
+        
+        activityLoader.hidesWhenStopped = true
+        activityLoader.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        activityLoader.frame = CGRectMake(0.0, 0.0, 60.0, 60.0);
+        activityLoader.center = CGPointMake(container.frame.size.width / 2, container.frame.size.height / 2);
+        activityLoader.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        activityLoader.startAnimating()
+        container.addSubview(activityLoader)
+        return container
+    }
 }
 
 //MARK:- Image Orientation fix
