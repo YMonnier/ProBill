@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import CoreData
 
-class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var category: Category?
     var managedObjectContext: NSManagedObjectContext? = nil
@@ -29,6 +30,14 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    /**
+     dismiss inputView when user touch outside the view
+     */
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+        self.searchBar.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
     }
     
     func insertNewObject(sender: AnyObject) {
@@ -104,7 +113,47 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         cell.name.text = "\(object.name)"
     }
     
-    //MARK: - Fetch Control
+    //MARK:- Search Control
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(#function)
+        var predicate: NSPredicate? = nil
+        self.searchBar.text?.characters.count
+        if self.searchBar.text?.characters.count != 0 {
+            predicate = NSPredicate(format: "category.name = %@ && (name contains [cd] %@)", self.category!.name, searchBar.text!)
+        }
+        self.fetchedResultsController.fetchRequest.predicate = predicate
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    // called when cancel button pressed
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print(#function)
+        self.searchBar.showsCancelButton = false
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
+        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "category.name = %@", self.category!.name)
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+        }
+        tableView.reloadData()
+    }
+    
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.searchBar.showsCancelButton = true
+        return true
+    }
+    
+    //MARK:- Fetch Control
     
     var fetchedResultsController: NSFetchedResultsController {
         if self._fetchedResultsController != nil {

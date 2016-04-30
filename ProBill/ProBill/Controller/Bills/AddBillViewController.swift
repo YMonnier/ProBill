@@ -250,6 +250,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
         self.takePictureButton.layer.borderWidth = 3.0
         self.takePictureButton.layer.borderColor = PBColor.gray.CGColor
+        self.takePictureButton.layer.zPosition = 100
     }
     
     @IBAction func takePictureAction(sender: UIButton) {
@@ -257,7 +258,6 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.imagePicker =  UIImagePickerController()
         self.imagePicker.delegate = self
         self.imagePicker.sourceType = .Camera
-        
         self.presentViewController(self.imagePicker, animated: true, completion: nil)
     }
     
@@ -266,7 +266,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         let imageFromCamera = (info[UIImagePickerControllerOriginalImage] as? UIImage)
         imageFromCamera!.fixOrientation()
-        self.picture.image = imageFromCamera//UIImage(CGImage: imageFromCamera!.CGImage!,scale: 1.0,orientation: .Right)
+        self.picture.image = imageFromCamera
     }
     
     
@@ -274,11 +274,15 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func saveBill() {
         print(#function)
         if self.subCategorieSelected != nil && self.dateSelected != nil && self.picture.image != nil && !self.priceTextField.text!.isEmpty {
+ 
             let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
             bill.date = self.dateSelected!
-            bill.picture = UIImagePNGRepresentation(self.picture.image!)!
+            
+            //Save JPEG image with 0.5 compression (middle quality)
+            bill.picture = UIImageJPEGRepresentation(self.picture.image!, 0.5)!
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
             bill.subCategory = self.subCategorieSelected!
+            
             do {
                 try self.managedObjectContext?.save()
                 self.navigationController?.popViewControllerAnimated(true)

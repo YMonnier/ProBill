@@ -9,9 +9,12 @@
 import UIKit
 import CoreData
 
-class CategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class CategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var searchActive : Bool = false
     var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
@@ -21,6 +24,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         
+        
         //Delete padding top
         self.automaticallyAdjustsScrollViewInsets = false
     }
@@ -29,6 +33,17 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
     }
     
+    /**
+     dismiss inputView when user touch outside the view
+     */
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+        self.searchBar.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    /**
+        Show alerte with textField + Insert new category
+    */
     func insertNewObject(sender: AnyObject) {
         let alert = UIAlertController(title: "Categories", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
@@ -117,7 +132,47 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         cell.name.text = "\(object.name)"
     }
     
-    //MARK: - Fetch Control
+    //MARK:- Search Control
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(#function)
+        var predicate: NSPredicate? = nil
+        self.searchBar.text?.characters.count
+        if self.searchBar.text?.characters.count != 0 {
+            predicate = NSPredicate(format: "(name contains [cd] %@)", searchBar.text!)
+        }
+        self.fetchedResultsController.fetchRequest.predicate = predicate
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+        }
+
+        tableView.reloadData()
+    }
+    
+    // called when cancel button pressed
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print(#function)
+        self.searchBar.showsCancelButton = false
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
+        fetchedResultsController.fetchRequest.predicate = nil
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
+        }
+        tableView.reloadData()
+    }
+    
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.searchBar.showsCancelButton = true
+        return true
+    }
+    
+    //MARK:- Fetch Control
     
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
