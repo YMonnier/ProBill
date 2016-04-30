@@ -7,9 +7,9 @@ You can organize categories and sub-categories.
 
 Preview
 -------
-![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_1.jpg)    ![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_1.jpg)
-![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_2.jpg)    ![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_2.jpg)
-![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_3.jpg)    ![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_3.jpg)
+![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_1.jpg)
+![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_2.jpg)
+![Screenshot](https://raw.githubusercontent.com/YMonnier/ProBill/master/Screenshots/img_3.jpg)
 
 Features
 --------
