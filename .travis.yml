@@ -5,4 +5,4 @@ xcode_project: ProBill/ProBill.xcodeproj
 xcode_scheme: ProBill
 xcode_sdk: iphonesimulator
 script:
-- xcodebuild -project ProBill/ProBill.xcodeproj -scheme ProBill -sdk iphonesimulator
+- xcodebuild -project ProBill/ProBill.xcodeproj -scheme ProBill
