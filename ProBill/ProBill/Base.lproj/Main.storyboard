@@ -646,12 +646,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qba-uk-vmW">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZE-XV-bID">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
@@ -673,25 +667,40 @@
                                             </mask>
                                         </variation>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qba-uk-vmW">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NP6-o3-hEv">
+                                        <rect key="frame" x="-19" y="-18" width="39" height="37"/>
+                                        <color key="pageIndicatorTintColor" red="1" green="0.8980392157" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="currentPageIndicatorTintColor" red="0.25490196079999999" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="NP6-o3-hEv" firstAttribute="trailing" secondItem="cZE-XV-bID" secondAttribute="trailing" id="0bo-IH-WjM"/>
                                     <constraint firstAttribute="bottom" secondItem="cZE-XV-bID" secondAttribute="bottom" id="1yD-CQ-Iph"/>
                                     <constraint firstItem="Qba-uk-vmW" firstAttribute="trailing" secondItem="VkL-q4-wha" secondAttribute="trailing" id="3bw-nd-hq2"/>
                                     <constraint firstItem="VkL-q4-wha" firstAttribute="trailing" secondItem="cZE-XV-bID" secondAttribute="trailing" id="DaJ-fh-wJt"/>
+                                    <constraint firstItem="NP6-o3-hEv" firstAttribute="centerY" secondItem="cZE-XV-bID" secondAttribute="centerY" id="H4R-Kc-6E5"/>
                                     <constraint firstItem="cZE-XV-bID" firstAttribute="top" secondItem="VkL-q4-wha" secondAttribute="bottom" constant="8" symbolic="YES" id="Q9K-Xv-cV8"/>
                                     <constraint firstItem="Qba-uk-vmW" firstAttribute="leading" secondItem="vTh-70-BXw" secondAttribute="leadingMargin" id="Yj3-YH-CRi"/>
                                     <constraint firstItem="Qba-uk-vmW" firstAttribute="leading" secondItem="VkL-q4-wha" secondAttribute="leading" id="abh-dm-90g"/>
                                     <constraint firstItem="Qba-uk-vmW" firstAttribute="trailing" secondItem="vTh-70-BXw" secondAttribute="trailingMargin" id="ltl-Z3-eTP"/>
                                     <constraint firstItem="VkL-q4-wha" firstAttribute="top" secondItem="Qba-uk-vmW" secondAttribute="bottom" constant="8" symbolic="YES" id="nNV-O3-zcH"/>
+                                    <constraint firstItem="NP6-o3-hEv" firstAttribute="leading" secondItem="cZE-XV-bID" secondAttribute="leading" id="pEG-kd-cxw"/>
                                     <constraint firstItem="Qba-uk-vmW" firstAttribute="top" secondItem="vTh-70-BXw" secondAttribute="topMargin" id="sUU-wY-c22"/>
                                     <constraint firstItem="VkL-q4-wha" firstAttribute="leading" secondItem="cZE-XV-bID" secondAttribute="leading" id="xpC-Nf-S9h"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="VkL-q4-wha"/>
-                                        <exclude reference="Qba-uk-vmW"/>
                                         <exclude reference="cZE-XV-bID"/>
+                                        <exclude reference="Qba-uk-vmW"/>
+                                        <exclude reference="NP6-o3-hEv"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="3bw-nd-hq2"/>
@@ -702,6 +711,9 @@
                                         <exclude reference="DaJ-fh-wJt"/>
                                         <exclude reference="nNV-O3-zcH"/>
                                         <exclude reference="xpC-Nf-S9h"/>
+                                        <exclude reference="0bo-IH-WjM"/>
+                                        <exclude reference="H4R-Kc-6E5"/>
+                                        <exclude reference="pEG-kd-cxw"/>
                                         <exclude reference="1yD-CQ-Iph"/>
                                         <exclude reference="Q9K-Xv-cV8"/>
                                     </mask>
@@ -709,8 +721,9 @@
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="VkL-q4-wha"/>
-                                        <include reference="Qba-uk-vmW"/>
                                         <include reference="cZE-XV-bID"/>
+                                        <include reference="Qba-uk-vmW"/>
+                                        <include reference="NP6-o3-hEv"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="3bw-nd-hq2"/>
@@ -721,6 +734,9 @@
                                         <include reference="DaJ-fh-wJt"/>
                                         <include reference="nNV-O3-zcH"/>
                                         <include reference="xpC-Nf-S9h"/>
+                                        <include reference="0bo-IH-WjM"/>
+                                        <include reference="H4R-Kc-6E5"/>
+                                        <include reference="pEG-kd-cxw"/>
                                         <include reference="1yD-CQ-Iph"/>
                                         <include reference="Q9K-Xv-cV8"/>
                                     </mask>
