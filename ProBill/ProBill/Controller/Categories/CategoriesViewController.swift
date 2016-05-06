@@ -21,6 +21,9 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
+        //Delete useless separator cell
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         

@@ -136,8 +136,6 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
                 self.data = (result as! [SubCategory]).filter({ (sc) -> Bool in
                     !sc.bills.isEmpty
                 })
-                
-                
             }
         }
     }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480FC0491CDCB60600A57703 /* PhotoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FC0481CDCB60600A57703 /* PhotoCellView.swift */; };
+		480FC04B1CDCB63E00A57703 /* PhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */; };
+		480FC04D1CDCBA9C00A57703 /* AddPhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */; };
 		4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */; };
 		4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE81CD4B209001556F4 /* GlobalExtension.swift */; };
 		4814CEEB1CD4F1A5001556F4 /* BillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4814CEEA1CD4F1A5001556F4 /* BillCell.xib */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		480FC0481CDCB60600A57703 /* PhotoCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellView.swift; sourceTree = "<group>"; };
+		480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCellView.xib; sourceTree = "<group>"; };
+		480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPhotoCellView.xib; sourceTree = "<group>"; };
 		4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
 		4814CEE81CD4B209001556F4 /* GlobalExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		4814CEEA1CD4F1A5001556F4 /* BillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
@@ -108,11 +114,11 @@
 				489B441F1CD37C08003208EA /* AppDelegate.swift */,
 				4814CEE81CD4B209001556F4 /* GlobalExtension.swift */,
 				489B44231CD37C08003208EA /* Main.storyboard */,
+				489B44291CD37C08003208EA /* Assets.xcassets */,
 				489B44261CD37C08003208EA /* ProBill.xcdatamodeld */,
 				489B44451CD3B5CE003208EA /* Model */,
 				489B44461CD3B5CE003208EA /* View */,
 				489B44421CD3B5CE003208EA /* Controller */,
-				489B44291CD37C08003208EA /* Assets.xcassets */,
 				489B442B1CD37C08003208EA /* LaunchScreen.storyboard */,
 				489B442E1CD37C08003208EA /* Info.plist */,
 			);
@@ -182,6 +188,9 @@
 				4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */,
 				4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */,
 				4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */,
+				480FC0481CDCB60600A57703 /* PhotoCellView.swift */,
+				480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */,
+				480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */,
 			);
 			path = Bills;
 			sourceTree = "<group>";
@@ -276,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4814CEEB1CD4F1A5001556F4 /* BillCell.xib in Resources */,
+				480FC04B1CDCB63E00A57703 /* PhotoCellView.xib in Resources */,
 				489B442D1CD37C08003208EA /* LaunchScreen.storyboard in Resources */,
 				489B442A1CD37C08003208EA /* Assets.xcassets in Resources */,
 				4814CEED1CD4F1B2001556F4 /* BillHeader.xib in Resources */,
+				480FC04D1CDCBA9C00A57703 /* AddPhotoCellView.xib in Resources */,
 				489B44251CD37C08003208EA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +318,7 @@
 				4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */,
 				489B44501CD3C137003208EA /* Bill.swift in Sources */,
 				489B444E1CD3C065003208EA /* SubCategory.swift in Sources */,
+				480FC0491CDCB60600A57703 /* PhotoCellView.swift in Sources */,
 				4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */,
 				489B44201CD37C08003208EA /* AppDelegate.swift in Sources */,
 				4814CEF11CD4F1DC001556F4 /* BillHeaderView.swift in Sources */,

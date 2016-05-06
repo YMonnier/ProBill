@@ -20,6 +20,9 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Delete useless separator cell
+        //self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         //Title
         let label = UILabel(frame: CGRectMake(0, 0, 440, 44))
         label.backgroundColor = UIColor.clearColor()
@@ -95,10 +98,6 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         let cell: CategoriesCellView = tableView.dequeueReusableCellWithIdentifier("CatCell") as! CategoriesCellView
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

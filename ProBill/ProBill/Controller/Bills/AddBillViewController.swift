@@ -10,12 +10,14 @@ import Foundation
 import UIKit
 import CoreData
 
-class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate {
+class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //ImagePciker
     var imagePicker: UIImagePickerController!
     @IBOutlet weak var takePictureButton: UIButton!
     @IBOutlet weak var commentTextview: UITextView!
+    
+    @IBOutlet weak var pictureCollectionView: UICollectionView!
     
     //TextField
     @IBOutlet weak var categoryTextField: UITextField!
@@ -31,6 +33,8 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //Save info
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var picture: UIImageView!
+    
+    var pictures: [UIImage] = []
     var subCategorieSelected: SubCategory?
     var dateSelected: NSDate?
     
@@ -45,9 +49,20 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         self.title = "Your bill"
         
+        //Register
+        self.pictureCollectionView!.registerNib(UINib(nibName: "PhotoCellView", bundle: NSBundle(forClass: AddBillViewController.self )), forCellWithReuseIdentifier: "PhotoCell")
+        self.pictureCollectionView!.registerNib(UINib(nibName: "AddPhotoCellView", bundle: NSBundle(forClass: AddBillViewController.self )), forCellWithReuseIdentifier: "AddPhotoCell")
+
+        
         //Right button (save bill)
         let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: #selector(AddBillViewController.saveBill))
         self.navigationItem.rightBarButtonItem = doneButton
+        
+        //PictureCollectionView
+        self.pictureCollectionView.delegate = self
+        self.pictureCollectionView.dataSource = self
+        self.pictureCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
+        self.pictureCollectionView.layer.zPosition = 100
         
         //TextField
         self.categoryTextField.delegate = self
@@ -97,7 +112,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 self.categoryPickerView.selectedRowInComponent(0)
                 self.pickerView(self.categoryPickerView, didSelectRow: 0, inComponent: 0)
             } else {
-                self.showSimpleAlert("Your bill", message: "There are no categories.c")
+                self.showSimpleAlert("Your bill", message: "There are no categories.")
             }
             break
         case self.subCategoryTextField:
@@ -105,7 +120,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 self.subCategoryPickerView.selectedRowInComponent(0)
                 self.pickerView(self.subCategoryPickerView, didSelectRow: 0, inComponent: 0)
             } else {
-                self.showSimpleAlert("Your bill", message: "There are no sub category.")
+                self.showSimpleAlert("Your bill", message: "There are no sub categories.")
             }
             break
         default:
@@ -265,7 +280,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     private func initPictureButton() {
         self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
         self.takePictureButton.layer.borderWidth = 3.0
-        self.takePictureButton.layer.borderColor = PBColor.gray.CGColor
+        self.takePictureButton.layer.borderColor = PBColor.blue.CGColor
         self.takePictureButton.layer.zPosition = 100
     }
     
@@ -283,9 +298,57 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let imageFromCamera = (info[UIImagePickerControllerOriginalImage] as? UIImage)
         imageFromCamera!.fixOrientation()
         self.picture.image = imageFromCamera
+        self.pictures.append(self.picture.image!)
+        self.pictureCollectionView.reloadData()
     }
     
+    //MARK: PictureCollectionView delegate/datasource
+ 
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.pictures.count + 1
+    }
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        print("AddPicturecell... \(indexPath)")
+        //var cell: UICollectionViewCell?
+        
+        if indexPath.row == self.pictures.count {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AddPhotoCell", forIndexPath: indexPath)
+            cell.backgroundColor = UIColor.clearColor()
+            return cell
+        } else {
+            let cell: PhotoCellView = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCellView
+            cell.picture.image = self.pictures[indexPath.row]
+            return cell
+            //cell.picture.image = self.pictures[indexPath.row].image
+        }
+        
+        //let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! FTCalendarCellView
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("DidSelectItem ... \(indexPath)")
+        //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! FTCalendarCellView
+        if indexPath.row == self.pictures.count {
+            self.takePictureAction(self.takePictureButton)
+        } else {
+            self.picture.image = self.pictures[indexPath.row]
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
+        //let rect = UIScreen.mainScreen().bounds
+        //let screenWidth = rect.size.width
+        return CGSizeMake(30,40);
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsetsMake(5, 20, 0, 0);
+    }
+
     //MARK: - Save Action
     func saveBill() {
         print(#function)
@@ -294,8 +357,8 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
             bill.date = self.dateSelected!
             
-            //Save JPEG image with 0.5 compression (middle quality)
-            bill.picture = UIImageJPEGRepresentation(self.picture.image!, 0.5)!
+            //Save JPEG image with 0.0 compression (lowest quality)
+            bill.picture = UIImageJPEGRepresentation(self.picture.image!, 0.0)!
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
             bill.subCategory = self.subCategorieSelected!
             bill.comment = self.commentTextview.text
