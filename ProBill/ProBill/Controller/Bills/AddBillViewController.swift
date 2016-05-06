@@ -320,11 +320,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let cell: PhotoCellView = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCellView
             cell.picture.image = self.pictures[indexPath.row]
             return cell
-            //cell.picture.image = self.pictures[indexPath.row].image
         }
-        
-        //let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! FTCalendarCellView
-        
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -339,8 +335,6 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        //let rect = UIScreen.mainScreen().bounds
-        //let screenWidth = rect.size.width
         return CGSizeMake(30,40);
     }
     
@@ -350,19 +344,27 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
 
     //MARK: - Save Action
+    
     func saveBill() {
         print(#function)
         if self.subCategorieSelected != nil && self.dateSelected != nil && self.picture.image != nil && !self.priceTextField.text!.isEmpty {
  
             let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
-            bill.date = self.dateSelected!
             
-            //Save JPEG image with 0.0 compression (lowest quality)
-            bill.picture = UIImageJPEGRepresentation(self.picture.image!, 0.0)!
+            bill.date = self.dateSelected!
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
             bill.subCategory = self.subCategorieSelected!
             bill.comment = self.commentTextview.text
             
+            //Cross all images
+            for image in self.pictures {
+                let picture: Picture = NSEntityDescription.insertNewObjectForEntityForName("Picture", inManagedObjectContext: self.managedObjectContext!) as! Picture
+                
+                //Save JPEG image with 0.0 compression (lowest quality)
+                picture.image = UIImageJPEGRepresentation(image, 0.0)!
+                bill.pictures.insert(picture)
+            }
+
             do {
                 try self.managedObjectContext?.save()
                 self.navigationController?.popViewControllerAnimated(true)

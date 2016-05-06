@@ -10,6 +10,7 @@
 		480FC0491CDCB60600A57703 /* PhotoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FC0481CDCB60600A57703 /* PhotoCellView.swift */; };
 		480FC04B1CDCB63E00A57703 /* PhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */; };
 		480FC04D1CDCBA9C00A57703 /* AddPhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */; };
+		480FC04F1CDCF4B700A57703 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FC04E1CDCF4B700A57703 /* Picture.swift */; };
 		4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */; };
 		4814CEE91CD4B209001556F4 /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEE81CD4B209001556F4 /* GlobalExtension.swift */; };
 		4814CEEB1CD4F1A5001556F4 /* BillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4814CEEA1CD4F1A5001556F4 /* BillCell.xib */; };
@@ -46,6 +47,7 @@
 		480FC0481CDCB60600A57703 /* PhotoCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellView.swift; sourceTree = "<group>"; };
 		480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCellView.xib; sourceTree = "<group>"; };
 		480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPhotoCellView.xib; sourceTree = "<group>"; };
+		480FC04E1CDCF4B700A57703 /* Picture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		4814CEE61CD4AD0A001556F4 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
 		4814CEE81CD4B209001556F4 /* GlobalExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		4814CEEA1CD4F1A5001556F4 /* BillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				489B444B1CD3BF29003208EA /* Category.swift */,
 				489B444D1CD3C065003208EA /* SubCategory.swift */,
 				489B444F1CD3C137003208EA /* Bill.swift */,
+				480FC04E1CDCF4B700A57703 /* Picture.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				489B444C1CD3BF29003208EA /* Category.swift in Sources */,
 				489B44281CD37C08003208EA /* ProBill.xcdatamodeld in Sources */,
 				4814CEEF1CD4F1D1001556F4 /* BillCellView.swift in Sources */,
+				480FC04F1CDCF4B700A57703 /* Picture.swift in Sources */,
 				488917DB1CD55A0500966695 /* BillDetailViewController.swift in Sources */,
 				489B444A1CD3B703003208EA /* CategoriesViewController.swift in Sources */,
 				489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */,

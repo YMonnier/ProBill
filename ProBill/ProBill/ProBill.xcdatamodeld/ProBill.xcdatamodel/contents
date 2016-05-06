@@ -5,11 +5,16 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Picture" inverseName="bill" inverseEntity="Picture" syncable="YES"/>
         <relationship name="subCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubCategory" inverseName="bills" inverseEntity="SubCategory" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="subCategories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubCategory" inverseName="category" inverseEntity="SubCategory" syncable="YES"/>
+    </entity>
+    <entity name="Picture" representedClassName="Picture" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="bill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bill" inverseName="pictures" inverseEntity="Bill" syncable="YES"/>
     </entity>
     <entity name="SubCategory" representedClassName="SubCategory" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,8 +22,9 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subCategories" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bill" positionX="162" positionY="-171" width="128" height="118"/>
+        <element name="Bill" positionX="162" positionY="-171" width="128" height="133"/>
         <element name="Category" positionX="-54" positionY="-9" width="128" height="75"/>
         <element name="SubCategory" positionX="378" positionY="6" width="128" height="90"/>
+        <element name="Picture" positionX="153" positionY="-54" width="128" height="75"/>
     </elements>
 </model>

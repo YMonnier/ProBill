@@ -18,7 +18,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     var managedObjectContext: NSManagedObjectContext? = nil
     var billSegue: Bill? = nil
-
+    
     //Data
     var data: [SubCategory] = []
     
@@ -81,7 +81,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         let bill: Bill = Array(self.data[indexPath.section].bills)[indexPath.row]
         //cell.backgroundColor = UIColor.clearColor()
 
-        cell.picture.image = UIImage(data: bill.picture)
+        cell.picture.image = UIImage(data: (bill.pictures.first?.image)!)
         cell.price.text = String(bill.price) + " Zl"
         cell.date.text = bill.date.toString("yyyy-MM-dd")
         return cell

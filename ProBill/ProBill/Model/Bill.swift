@@ -16,4 +16,5 @@ class Bill: NSManagedObject{
     @NSManaged var date: NSDate
     @NSManaged var comment: String
     @NSManaged var subCategory: SubCategory
+    @NSManaged var pictures: Set<Picture>
 }
