@@ -298,6 +298,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             bill.picture = UIImageJPEGRepresentation(self.picture.image!, 0.5)!
             bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
             bill.subCategory = self.subCategorieSelected!
+            bill.comment = self.commentTextview.text
             
             do {
                 try self.managedObjectContext?.save()
