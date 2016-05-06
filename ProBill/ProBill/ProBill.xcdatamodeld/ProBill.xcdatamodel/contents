@@ -16,8 +16,8 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subCategories" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Bill" positionX="162" positionY="-171" width="128" height="105"/>
         <element name="Category" positionX="-54" positionY="-9" width="128" height="75"/>
         <element name="SubCategory" positionX="378" positionY="6" width="128" height="90"/>
-        <element name="Bill" positionX="162" positionY="27" width="128" height="105"/>
     </elements>
 </model>

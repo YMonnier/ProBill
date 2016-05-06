@@ -11,8 +11,6 @@ import CoreData
 
 @objc(Category)
 class Category: NSManagedObject {
-    //@NSManaged var id: Int
     @NSManaged var name: String
-    //@NSManaged var sex: [String]
     @NSManaged var subCategories: Set<SubCategory>
 }

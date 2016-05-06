@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 
-class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate {
     
     //ImagePciker
     var imagePicker: UIImagePickerController!
     @IBOutlet weak var takePictureButton: UIButton!
+    @IBOutlet weak var commentTextview: UITextView!
     
     //TextField
     @IBOutlet weak var categoryTextField: UITextField!
@@ -53,6 +54,13 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.subCategoryTextField.delegate = self
         self.dateTextField.delegate = self
         
+        //TextView (comment)
+        self.commentTextview.delegate = self
+        self.commentTextview.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.commentTextview.textColor = UIColor.lightGrayColor()
+        self.commentTextview.layer.borderWidth = 0.5
+        self.commentTextview.layer.cornerRadius = 5
+        
         //UIPickerView
         self.initCategoryPicker()
         self.initSubCategoryPicker()
@@ -67,6 +75,14 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    //MARK:- TextView (comment)
+
+    func textViewDidBeginEditing(textView: UITextView) {
+        textView.text = ""
+        textView.textColor = UIColor.blackColor()
+    }
+    
     
     //MARK: - TextField
     /**
