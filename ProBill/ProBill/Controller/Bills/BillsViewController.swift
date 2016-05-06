@@ -117,7 +117,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         return UIEdgeInsetsMake(10, 5, 10, 5); //top,left,bottom,right
     }
     
-    //MARK: - LoadData
+    //MARK:- LoadData
     private func loadData() {
         autoreleasepool {
             var error: NSError? = nil
