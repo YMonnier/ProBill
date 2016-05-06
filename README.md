@@ -28,6 +28,7 @@ Todo
 ----
 + Search Control for UICollectionView
 + Share Bill (export PDF File or Web API)
++ Statistics tab, statistic bill per month, year per category/sub category
 
 License
 -------
