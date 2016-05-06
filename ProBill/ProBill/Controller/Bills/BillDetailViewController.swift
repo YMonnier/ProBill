@@ -19,6 +19,8 @@ class BillDetailViewController: UIViewController {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var overlay: UIView!
     
+    var currentPictureIndex: Int = 0
+    
     var pictures: [Picture]?
     var bill: Bill?
     
@@ -43,13 +45,23 @@ class BillDetailViewController: UIViewController {
         
         //Actions button
         let trashButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(BillDetailViewController.deleteObject(_:)))
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BillDetailViewController.deleteObject(_:)))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(BillDetailViewController.shareObject(_:)))
         self.navigationItem.rightBarButtonItems = [trashButton, shareButton]
         
         //Page Control
         self.pageControl.numberOfPages = self.bill!.pictures.count
-        
+        self.pageControl.currentPage = self.currentPictureIndex
+        self.pageControl.transform = CGAffineTransformMakeScale(1.15, 1.15);
         self.pictures = Array(self.bill!.pictures)
+        
+        //Swipe pictures
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(BillDetailViewController.respondToSwipeGesture(_:)))
+        swipeRight.direction = .Right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(BillDetailViewController.respondToSwipeGesture(_:)))
+        swipeDown.direction = .Left
+        self.view.addGestureRecognizer(swipeDown)
         
         //Put data into UI
         self.commentTextView.text = self.bill!.comment
@@ -62,6 +74,8 @@ class BillDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    //MARK: Action
     
     func deleteObject(sender: AnyObject) {
         let alert = UIAlertController(title: "Your Bill", message: "Are you sure to delete this bill?", preferredStyle: .Alert)
@@ -82,5 +96,24 @@ class BillDetailViewController: UIViewController {
     
     func shareObject(sender: AnyObject) {
         //TODO...
+    }
+    
+    //MARK: Swipe picture
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                print("Swiped right")
+                self.currentPictureIndex = self.currentPictureIndex + 1 == self.pictures?.count ? 0 : self.currentPictureIndex + 1
+            case UISwipeGestureRecognizerDirection.Left:
+                print("Swiped left")
+                self.currentPictureIndex = self.currentPictureIndex - 1 == -1 ? self.pictures!.count - 1 : self.currentPictureIndex - 1
+            default:
+                break
+            }
+            self.pageControl.currentPage = self.currentPictureIndex
+            self.picture.image = UIImage(data:(self.pictures![self.currentPictureIndex].image))
+        }
     }
 }
