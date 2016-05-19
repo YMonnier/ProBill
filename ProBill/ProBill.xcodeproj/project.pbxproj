@@ -17,6 +17,7 @@
 		4814CEED1CD4F1B2001556F4 /* BillHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */; };
 		4814CEEF1CD4F1D1001556F4 /* BillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */; };
 		4814CEF11CD4F1DC001556F4 /* BillHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */; };
+		482D69251CEDE7F200753E6C /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D69241CEDE7F200753E6C /* StatisticsViewController.swift */; };
 		488917DB1CD55A0500966695 /* BillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488917DA1CD55A0500966695 /* BillDetailViewController.swift */; };
 		489B44201CD37C08003208EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B441F1CD37C08003208EA /* AppDelegate.swift */; };
 		489B44251CD37C08003208EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B44231CD37C08003208EA /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		4814CEEC1CD4F1B2001556F4 /* BillHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillHeader.xib; sourceTree = "<group>"; };
 		4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillCellView.swift; sourceTree = "<group>"; };
 		4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillHeaderView.swift; sourceTree = "<group>"; };
+		482D69241CEDE7F200753E6C /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		488917DA1CD55A0500966695 /* BillDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillDetailViewController.swift; sourceTree = "<group>"; };
 		489B441C1CD37C08003208EA /* ProBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489B441F1CD37C08003208EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		482D69231CEDE7E200753E6C /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				482D69241CEDE7F200753E6C /* StatisticsViewController.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		489B44131CD37C08003208EA = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 		489B44421CD3B5CE003208EA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				482D69231CEDE7E200753E6C /* Statistics */,
 				489B44431CD3B5CE003208EA /* Bills */,
 				489B44441CD3B5CE003208EA /* Categories */,
 			);
@@ -318,6 +329,7 @@
 				480FC04F1CDCF4B700A57703 /* Picture.swift in Sources */,
 				488917DB1CD55A0500966695 /* BillDetailViewController.swift in Sources */,
 				489B444A1CD3B703003208EA /* CategoriesViewController.swift in Sources */,
+				482D69251CEDE7F200753E6C /* StatisticsViewController.swift in Sources */,
 				489B44561CD3D5CD003208EA /* CategoriesCellView.swift in Sources */,
 				4814CEE71CD4AD0A001556F4 /* AddBillViewController.swift in Sources */,
 				489B44501CD3C137003208EA /* Bill.swift in Sources */,

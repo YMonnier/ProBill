@@ -822,6 +822,7 @@
                     <connections>
                         <segue destination="py5-5A-umk" kind="relationship" relationship="viewControllers" id="2pb-Ca-RBu"/>
                         <segue destination="8TM-b8-vF3" kind="relationship" relationship="viewControllers" id="ROe-Ko-zf4"/>
+                        <segue destination="waQ-60-1sJ" kind="relationship" relationship="viewControllers" id="BOZ-Hx-Fbo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lp-gh-XYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -868,9 +869,74 @@
             </objects>
             <point key="canvasLocation" x="646" y="814"/>
         </scene>
+        <!--Statistics-->
+        <scene sceneID="t6K-rY-n4U">
+            <objects>
+                <viewController id="8Qg-Oy-UTl" customClass="StatisticsViewController" customModule="ProBill" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="99r-BP-YrS"/>
+                        <viewControllerLayoutGuide type="bottom" id="DWV-VM-eyG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fjj-Q3-lcZ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O6d-2P-SQe">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="487"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Qg-Oy-UTl" id="yXs-PG-3IS"/>
+                                    <outlet property="delegate" destination="8Qg-Oy-UTl" id="brV-Tv-92K"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="O6d-2P-SQe"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="O6d-2P-SQe"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Statistics" id="MLU-rd-r0u"/>
+                    <connections>
+                        <outlet property="tableView" destination="O6d-2P-SQe" id="kSq-mZ-BZa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpF-T4-sK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1563" y="1598"/>
+        </scene>
+        <!--Statistics-->
+        <scene sceneID="Fus-r2-T3e">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="waQ-60-1sJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Statistics" image="statistics" id="82k-7I-Zxv"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KGa-vv-zYQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.8980392157" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Qg-Oy-UTl" kind="relationship" relationship="rootViewController" id="nbD-PD-b0F"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bzC-rf-8c3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="645" y="1598"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bill" width="25" height="26"/>
         <image name="category" width="25" height="25"/>
+        <image name="statistics" width="25" height="25"/>
     </resources>
 </document>
