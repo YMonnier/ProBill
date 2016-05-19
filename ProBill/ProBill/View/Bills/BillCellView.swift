@@ -19,7 +19,7 @@ class BillCellView: UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.borderWidth = 2
-        self.layer.borderColor = PBColor.blue.CGColor
+        self.layer.borderColor = PBColor.gray.CGColor
         self.layer.cornerRadius = 10
         
         self.overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
