@@ -123,7 +123,7 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print(#function)
         var predicate: NSPredicate? = NSPredicate(format: "category.name = %@", self.category!.name)
-        self.searchBar.text?.characters.count
+        
         if self.searchBar.text?.characters.count != 0 {
             predicate = NSPredicate(format: "category.name = %@ && (name contains [cd] %@)", self.category!.name, searchBar.text!)
         }
