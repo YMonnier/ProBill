@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BillsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BillsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     
     //CollectionView
     @IBOutlet weak var collectionView: UICollectionView!
@@ -141,8 +141,6 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
             if self.searchBar.text?.characters.count != 0 {
                 predicate = NSPredicate(format: "(name contains [cd] %@)", searchBar.text!)
             }
-            
-            
             
             let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
             fetch.predicate = predicate
