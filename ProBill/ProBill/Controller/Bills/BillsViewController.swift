@@ -16,11 +16,18 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     let reuseIdentifierCell = "BillCell"
     let reuseIdentifierHeader = "BillHeader"
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     var managedObjectContext: NSManagedObjectContext? = nil
     var billSegue: Bill? = nil
     
     //Data
-    var data: [SubCategory] = []
+    var data: [SubCategory] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +67,13 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
     }
     
+    //MARK: Action
+    
+    @IBAction func editAction(sender: AnyObject) {
+        
+    }
+    
+    
     //MARK: - UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -80,7 +94,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifierCell, forIndexPath: indexPath) as! BillCellView
         let bill: Bill = Array(self.data[indexPath.section].bills)[indexPath.row]
         //cell.backgroundColor = UIColor.clearColor()
-
+        
         cell.picture.image = UIImage(data: (bill.pictures.first?.image)!)
         cell.price.text = String(bill.price) + " Zl"
         cell.date.text = bill.date.toString("yyyy-MM-dd")
@@ -102,13 +116,11 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        print("ICI")
         if kind == UICollectionElementKindSectionHeader && !self.data[indexPath.section].bills.isEmpty {
             let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader, forIndexPath: indexPath) as! BillHeaderView
             header.title.text = self.data[indexPath.section].name
             return header;
         }
-        print("ONONONON")
         return UICollectionReusableView()
     }
     
@@ -117,7 +129,56 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         return UIEdgeInsetsMake(10, 5, 10, 5); //top,left,bottom,right
     }
     
-    //MARK:- LoadData
+    //MARK: - Search control
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(#function)
+        autoreleasepool {
+            var predicate: NSPredicate? = nil
+            var error: NSError? = nil
+            var result: [AnyObject]?
+            
+            if self.searchBar.text?.characters.count != 0 {
+                predicate = NSPredicate(format: "(name contains [cd] %@)", searchBar.text!)
+            }
+            
+            
+            
+            let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
+            fetch.predicate = predicate
+            do {
+                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+            } catch let nserror1 as NSError{
+                error = nserror1
+                result = nil
+            }
+            if result != nil {
+                self.data = []
+                self.data = (result as! [SubCategory]).filter({ (sc) -> Bool in
+                    !sc.bills.isEmpty
+                })
+            }
+        }
+        
+    }
+    
+    // called when cancel button pressed
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print(#function)
+        self.searchBar.showsCancelButton = false
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
+        self.loadData()
+    }
+    
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.searchBar.showsCancelButton = true
+        return true
+    }
+    
+    
+    //MARK: - LoadData
     private func loadData() {
         autoreleasepool {
             var error: NSError? = nil
