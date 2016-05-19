@@ -277,7 +277,7 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-fO-HtL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="1" green="0.8980392157" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="zc7-95-z8W" id="Z5c-Ht-y2p"/>
                                 </connections>
@@ -359,11 +359,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-My-m2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="rQs-b8-CQa">
                     <connections>
-                        <outlet property="delegate" destination="zc7-95-z8W" id="8XC-aM-w2i"/>
                         <outlet property="searchBar" destination="Eea-fO-HtL" id="UlY-2y-cnD"/>
-                        <outlet property="searchContentsController" destination="zc7-95-z8W" id="Gkd-20-fwm"/>
-                        <outlet property="searchResultsDataSource" destination="zc7-95-z8W" id="DQ3-iq-9Jt"/>
-                        <outlet property="searchResultsDelegate" destination="zc7-95-z8W" id="dkb-XB-rBF"/>
                     </connections>
                 </searchDisplayController>
             </objects>
