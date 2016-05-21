@@ -881,79 +881,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O6d-2P-SQe">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7G-qI-Wzu" customClass="PieChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="241" id="Axe-6c-M0H">
-                                        <variation key="widthClass=compact" constant="155"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Axe-6c-M0H"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Axe-6c-M0H"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outlet property="dataSource" destination="8Qg-Oy-UTl" id="yXs-PG-3IS"/>
-                                    <outlet property="delegate" destination="8Qg-Oy-UTl" id="brV-Tv-92K"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7G-qI-Wzu" customClass="PieChartView" customModule="Charts">
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZE3-j1-CXZ" customClass="BarChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="O6d-2P-SQe" firstAttribute="bottom" secondItem="DWV-VM-eyG" secondAttribute="top" id="56D-r6-kQu"/>
-                            <constraint firstItem="O6d-2P-SQe" firstAttribute="top" secondItem="c7G-qI-Wzu" secondAttribute="bottom" constant="8" symbolic="YES" id="HWA-Yp-a1F"/>
+                            <constraint firstItem="c7G-qI-Wzu" firstAttribute="leading" secondItem="ZE3-j1-CXZ" secondAttribute="leading" id="H65-Xe-qJq"/>
                             <constraint firstAttribute="trailing" secondItem="c7G-qI-Wzu" secondAttribute="trailing" id="Ie9-Sv-dOE"/>
+                            <constraint firstItem="ZE3-j1-CXZ" firstAttribute="bottom" secondItem="DWV-VM-eyG" secondAttribute="top" id="OIU-aD-M14"/>
                             <constraint firstItem="c7G-qI-Wzu" firstAttribute="leading" secondItem="fjj-Q3-lcZ" secondAttribute="leading" id="YEi-ZY-agw"/>
-                            <constraint firstItem="c7G-qI-Wzu" firstAttribute="trailing" secondItem="O6d-2P-SQe" secondAttribute="trailing" id="bKz-0f-LKX"/>
+                            <constraint firstItem="c7G-qI-Wzu" firstAttribute="trailing" secondItem="ZE3-j1-CXZ" secondAttribute="trailing" id="iaY-ic-T3i"/>
                             <constraint firstItem="c7G-qI-Wzu" firstAttribute="top" secondItem="99r-BP-YrS" secondAttribute="bottom" id="j3k-l2-S25"/>
-                            <constraint firstItem="c7G-qI-Wzu" firstAttribute="leading" secondItem="O6d-2P-SQe" secondAttribute="leading" id="n9j-KR-dk7"/>
+                            <constraint firstItem="ZE3-j1-CXZ" firstAttribute="top" secondItem="c7G-qI-Wzu" secondAttribute="bottom" constant="8" symbolic="YES" id="qur-pc-pQN"/>
+                            <constraint firstItem="ZE3-j1-CXZ" firstAttribute="top" secondItem="fjj-Q3-lcZ" secondAttribute="top" constant="364" id="xu1-5r-blh"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="O6d-2P-SQe"/>
                                 <exclude reference="c7G-qI-Wzu"/>
+                                <exclude reference="ZE3-j1-CXZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="H65-Xe-qJq"/>
                                 <exclude reference="Ie9-Sv-dOE"/>
                                 <exclude reference="YEi-ZY-agw"/>
-                                <exclude reference="bKz-0f-LKX"/>
+                                <exclude reference="iaY-ic-T3i"/>
                                 <exclude reference="j3k-l2-S25"/>
-                                <exclude reference="n9j-KR-dk7"/>
-                                <exclude reference="56D-r6-kQu"/>
-                                <exclude reference="HWA-Yp-a1F"/>
+                                <exclude reference="OIU-aD-M14"/>
+                                <exclude reference="qur-pc-pQN"/>
+                                <exclude reference="xu1-5r-blh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="O6d-2P-SQe"/>
                                 <include reference="c7G-qI-Wzu"/>
+                                <include reference="ZE3-j1-CXZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="H65-Xe-qJq"/>
                                 <include reference="Ie9-Sv-dOE"/>
                                 <include reference="YEi-ZY-agw"/>
-                                <include reference="bKz-0f-LKX"/>
+                                <include reference="iaY-ic-T3i"/>
                                 <include reference="j3k-l2-S25"/>
-                                <include reference="n9j-KR-dk7"/>
-                                <include reference="56D-r6-kQu"/>
-                                <include reference="HWA-Yp-a1F"/>
+                                <include reference="OIU-aD-M14"/>
+                                <include reference="qur-pc-pQN"/>
+                                <include reference="xu1-5r-blh"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Statistics" id="MLU-rd-r0u"/>
                     <connections>
+                        <outlet property="barCharView" destination="ZE3-j1-CXZ" id="SZc-ir-aqd"/>
                         <outlet property="pieCharView" destination="c7G-qI-Wzu" id="8en-dT-kmU"/>
-                        <outlet property="tableView" destination="O6d-2P-SQe" id="kSq-mZ-BZa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpF-T4-sK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
