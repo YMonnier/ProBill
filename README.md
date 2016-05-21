@@ -24,6 +24,12 @@ Todo
 + Share Bill (export PDF File or Web API)
 + Statistics tab, statistic bill per month, year per category/sub category
 
+Installation
+------------
+1. `git `git@github.com:YMonnier/ProBill.git`
+2. `cd ProBill`
+3. `pod install` - IF you are not [CocoaPods](https://cocoapods.org)
+
 License
 -------
 ProBill is available under the MIT license. See the [LICENSE](https://github.com/YMonnier/ProBill/blob/master/LICENSE) file for more info.
