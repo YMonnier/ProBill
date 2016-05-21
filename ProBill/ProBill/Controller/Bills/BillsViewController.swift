@@ -104,6 +104,9 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.billSegue = Array(self.data[indexPath.section].bills)[indexPath.row]
         self.performSegueWithIdentifier("DetailSegue", sender: self)
+        self.searchBar.showsCancelButton = false
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
     }
     
     
@@ -183,7 +186,6 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
             var result: [AnyObject]?
             
             let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
-            
             do {
                 result = try self.managedObjectContext!.executeFetchRequest(fetch)
             } catch let nserror1 as NSError{
