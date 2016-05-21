@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26AEDCD1FCBA74E40DD00270 /* Pods_ProBill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CE29C0B5DDB024321CC6A8 /* Pods_ProBill.framework */; };
 		480FC0491CDCB60600A57703 /* PhotoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FC0481CDCB60600A57703 /* PhotoCellView.swift */; };
 		480FC04B1CDCB63E00A57703 /* PhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04A1CDCB63E00A57703 /* PhotoCellView.xib */; };
 		480FC04D1CDCBA9C00A57703 /* AddPhotoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480FC04C1CDCBA9C00A57703 /* AddPhotoCellView.xib */; };
@@ -18,6 +19,7 @@
 		4814CEEF1CD4F1D1001556F4 /* BillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */; };
 		4814CEF11CD4F1DC001556F4 /* BillHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */; };
 		482D69251CEDE7F200753E6C /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D69241CEDE7F200753E6C /* StatisticsViewController.swift */; };
+		4840A6A41CF09FDA00EB245E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4840A6A31CF09FDA00EB245E /* Charts.framework */; };
 		488917DB1CD55A0500966695 /* BillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488917DA1CD55A0500966695 /* BillDetailViewController.swift */; };
 		489B44201CD37C08003208EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B441F1CD37C08003208EA /* AppDelegate.swift */; };
 		489B44251CD37C08003208EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B44231CD37C08003208EA /* Main.storyboard */; };
@@ -56,6 +58,7 @@
 		4814CEEE1CD4F1D1001556F4 /* BillCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillCellView.swift; sourceTree = "<group>"; };
 		4814CEF01CD4F1DC001556F4 /* BillHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillHeaderView.swift; sourceTree = "<group>"; };
 		482D69241CEDE7F200753E6C /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		4840A6A31CF09FDA00EB245E /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/ProBill-auprvktnvehuebedpujbijtuxznf/Build/Products/Debug-iphoneos/Charts.framework"; sourceTree = "<group>"; };
 		488917DA1CD55A0500966695 /* BillDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillDetailViewController.swift; sourceTree = "<group>"; };
 		489B441C1CD37C08003208EA /* ProBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489B441F1CD37C08003208EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +77,9 @@
 		489B444F1CD3C137003208EA /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		489B44551CD3D5CD003208EA /* CategoriesCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCellView.swift; sourceTree = "<group>"; };
 		489B44571CD3E26E003208EA /* SubCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoriesViewController.swift; sourceTree = "<group>"; };
+		76628B92313A79EEDC58C546 /* Pods-ProBill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProBill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProBill/Pods-ProBill.debug.xcconfig"; sourceTree = "<group>"; };
+		B6CE29C0B5DDB024321CC6A8 /* Pods_ProBill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProBill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EAF79D9EFE1D758C951BDA /* Pods-ProBill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProBill.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProBill/Pods-ProBill.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4840A6A41CF09FDA00EB245E /* Charts.framework in Frameworks */,
+				26AEDCD1FCBA74E40DD00270 /* Pods_ProBill.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +116,8 @@
 				489B441E1CD37C08003208EA /* ProBill */,
 				489B44361CD37C09003208EA /* ProBillTests */,
 				489B441D1CD37C08003208EA /* Products */,
+				F2D44727CD60E28307179FAC /* Pods */,
+				F632CDD59252B7B279225ED6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,6 +227,24 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		F2D44727CD60E28307179FAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				76628B92313A79EEDC58C546 /* Pods-ProBill.debug.xcconfig */,
+				C3EAF79D9EFE1D758C951BDA /* Pods-ProBill.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F632CDD59252B7B279225ED6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4840A6A31CF09FDA00EB245E /* Charts.framework */,
+				B6CE29C0B5DDB024321CC6A8 /* Pods_ProBill.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -224,9 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 489B443C1CD37C09003208EA /* Build configuration list for PBXNativeTarget "ProBill" */;
 			buildPhases = (
+				4DDBC3E680E83B9DC534DDB0 /* Check Pods Manifest.lock */,
 				489B44181CD37C08003208EA /* Sources */,
 				489B44191CD37C08003208EA /* Frameworks */,
 				489B441A1CD37C08003208EA /* Resources */,
+				BF8136D38022543DFD6BCD6D /* Embed Pods Frameworks */,
+				5C23BEAC70BE1EC1D158A6D8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -316,6 +347,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4DDBC3E680E83B9DC534DDB0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5C23BEAC70BE1EC1D158A6D8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProBill/Pods-ProBill-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF8136D38022543DFD6BCD6D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProBill/Pods-ProBill-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		489B44181CD37C08003208EA /* Sources */ = {
@@ -465,6 +544,7 @@
 		};
 		489B443D1CD37C09003208EA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76628B92313A79EEDC58C546 /* Pods-ProBill.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ProBill/Info.plist;
@@ -476,6 +556,7 @@
 		};
 		489B443E1CD37C09003208EA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3EAF79D9EFE1D758C951BDA /* Pods-ProBill.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ProBill/Info.plist;
