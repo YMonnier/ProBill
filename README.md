@@ -26,7 +26,7 @@ Todo
 
 Installation
 ------------
-1. `git git@github.com:YMonnier/ProBill.git`
+1. `git clone git@github.com:YMonnier/ProBill.git`
 2. `cd ProBill`
 3. `pod install` - IF you are not [CocoaPods](https://cocoapods.org)
 
