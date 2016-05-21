@@ -4,23 +4,21 @@
 [![CI Status](https://travis-ci.org/YMonnier/ProBill.svg?branch=master)](https://travis-ci.org/YMonnier/ProBill)
 [![License](https://img.shields.io/cocoapods/l/Ouroboros.svg?style=flat)](https://github.com/YMonnier/ProBill/blob/master/LICENSE)
 
-ProBill is an open source application written in Swift. This application allow you to save your bills by taking a photo.
-You can organize categories and sub-categories.
+iOS Programming Project 2016 - University of Lodz | Poland
+
+ProBill is an application written in Swift. This application allow you to save your bills by taking a photo. You can organize categories, sub-categories and see the statistics.
 
 Features
 --------
 + CoreData (**NSFetchedResultsController**, **Insert**, **Delete**, **Relationship**)
 + UITableView
-+ UIPickerView
-+ UIDatePiker
 + UIImagePickerController
 + UICollectionView
 + UISearchBar
-+ xib View
++ [Charts](https://github.com/danielgindi/Charts)
 
 Todo
 ----
-+ Search Control for UICollectionView
 + Share Bill (export PDF File or Web API)
 + Statistics tab, statistic bill per month, year per category/sub category
 
