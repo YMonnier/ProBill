@@ -19,7 +19,18 @@ struct PBColor {
     static let gray = UIColor(red: (74/255), green: (74/255), blue: (74/255), alpha: 1.0)
 }
 
-//MARK:- NSDate
+//MAK: - UIColor
+
+extension UIColor {
+    public class func random() -> UIColor {
+        let red = Double(arc4random_uniform(256))
+        let green = Double(arc4random_uniform(256))
+        let blue = Double(arc4random_uniform(256))
+        return UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+    }
+}
+
+//MARK: - NSDate
 
 extension NSDate {
     func toString(format: String) -> String {
