@@ -6,5 +6,5 @@ xcode_scheme: ProBill
 xcode_sdk: iphonesimulator
 podfile: ProBill/Podfile
 script:
-- xcodebuild clean build test -project ProBill/ProBill.xcodeproj -scheme ProBillRelease GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+- xcodebuild clean build test -project ProBill/ProBill.xcodeproj -scheme ProBill GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 #- xcodebuild -project ProBill/ProBill.xcodeproj -scheme ProBill
