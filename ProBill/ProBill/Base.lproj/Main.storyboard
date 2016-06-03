@@ -338,11 +338,6 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Bills" id="N8i-RT-AeF">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="OJW-fh-jlD">
-                            <connections>
-                                <action selector="editAction:" destination="zc7-95-z8W" id="XZj-L5-LPi"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3SA-Yu-Qws">
                             <connections>
                                 <segue destination="IPz-Fc-CDS" kind="show" id="A10-ma-zrv"/>
@@ -907,14 +902,14 @@
                                 <exclude reference="ZE3-j1-CXZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="OIU-aD-M14"/>
+                                <exclude reference="qur-pc-pQN"/>
+                                <exclude reference="xu1-5r-blh"/>
                                 <exclude reference="H65-Xe-qJq"/>
                                 <exclude reference="Ie9-Sv-dOE"/>
                                 <exclude reference="YEi-ZY-agw"/>
                                 <exclude reference="iaY-ic-T3i"/>
                                 <exclude reference="j3k-l2-S25"/>
-                                <exclude reference="OIU-aD-M14"/>
-                                <exclude reference="qur-pc-pQN"/>
-                                <exclude reference="xu1-5r-blh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -923,14 +918,14 @@
                                 <include reference="ZE3-j1-CXZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="OIU-aD-M14"/>
+                                <include reference="qur-pc-pQN"/>
+                                <include reference="xu1-5r-blh"/>
                                 <include reference="H65-Xe-qJq"/>
                                 <include reference="Ie9-Sv-dOE"/>
                                 <include reference="YEi-ZY-agw"/>
                                 <include reference="iaY-ic-T3i"/>
                                 <include reference="j3k-l2-S25"/>
-                                <include reference="OIU-aD-M14"/>
-                                <include reference="qur-pc-pQN"/>
-                                <include reference="xu1-5r-blh"/>
                             </mask>
                         </variation>
                     </view>
