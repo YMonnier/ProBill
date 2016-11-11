@@ -31,11 +31,11 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        self.managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         
         //register nib view
-        self.collectionView!.registerNib(UINib(nibName: "BillCell", bundle: NSBundle(forClass: BillsViewController.self )), forCellWithReuseIdentifier: reuseIdentifierCell)
-        self.collectionView!.registerNib(UINib(nibName: "BillHeader", bundle: NSBundle(forClass: BillsViewController.self )), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader)
+        self.collectionView!.register(UINib(nibName: "BillCell", bundle: Bundle(for: BillsViewController.self )), forCellWithReuseIdentifier: reuseIdentifierCell)
+        self.collectionView!.register(UINib(nibName: "BillHeader", bundle: Bundle(for: BillsViewController.self )), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader)
         
         //Load data...
         self.loadData()
@@ -44,7 +44,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 1
         layout.minimumLineSpacing = 1
-        layout.headerReferenceSize = CGSizeMake(100,60)
+        layout.headerReferenceSize = CGSize(width: 100,height: 60)
         self.collectionView.collectionViewLayout = layout
         self.automaticallyAdjustsScrollViewInsets = false
     }
@@ -53,88 +53,89 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.loadData()
         self.collectionView.reloadData()
     }
     
     //MARK:- Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(#function)
         if segue.identifier == "DetailSegue" {
-            let destinationController = segue.destinationViewController as! BillDetailViewController
+            let destinationController = segue.destination as! BillDetailViewController
             destinationController.bill = self.billSegue
         }
     }
     
     //MARK: Action
     
-    @IBAction func editAction(sender: AnyObject) {
+    @IBAction func editAction(_ sender: AnyObject) {
         
     }
     
     
     //MARK: - UICollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         print(#function)
         print(self.data.count)
         return self.data.count
     }
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(#function)
         print(self.data[section].bills.count)
         return self.data[section].bills.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifierCell, forIndexPath: indexPath) as! BillCellView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierCell, for: indexPath) as! BillCellView
         let bill: Bill = Array(self.data[indexPath.section].bills)[indexPath.row]
         //cell.backgroundColor = UIColor.clearColor()
         
-        cell.picture.image = UIImage(data: (bill.pictures.first?.image)!)
+        cell.picture.image = UIImage(data: (bill.pictures.first?.image)! as Data)
         cell.price.text = String(bill.price) + " Zl"
         cell.date.text = bill.date.toString("yyyy-MM-dd")
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.billSegue = Array(self.data[indexPath.section].bills)[indexPath.row]
-        self.performSegueWithIdentifier("DetailSegue", sender: self)
+        self.performSegue(withIdentifier: "DetailSegue", sender: self)
         self.searchBar.showsCancelButton = false
         self.searchBar.resignFirstResponder()
         self.searchBar.text = ""
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
         
-        let rect = UIScreen.mainScreen().bounds
+        let rect = UIScreen.main.bounds
         let screenWidth = rect.size.width - 40
-        return CGSizeMake(screenWidth/3, 160);
+        return CGSize(width: screenWidth/3, height: 160);
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader && !self.data[indexPath.section].bills.isEmpty {
-            let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader, forIndexPath: indexPath) as! BillHeaderView
-            header.title.text = self.data[indexPath.section].name
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIdentifierHeader, for: indexPath) as! BillHeaderView
+            header.title.text = self.data[(indexPath as NSIndexPath).section].name
             return header;
         }
         return UICollectionReusableView()
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
     {
         return UIEdgeInsetsMake(10, 5, 10, 5); //top,left,bottom,right
     }
     
     //MARK: - Search control
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(#function)
         autoreleasepool {
             var predicate: NSPredicate? = nil
@@ -145,10 +146,10 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
                 predicate = NSPredicate(format: "(name contains [cd] %@)", searchBar.text!)
             }
             
-            let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
+            let fetch = NSFetchRequest<SubCategory>(entityName: "SubCategory")
             fetch.predicate = predicate
             do {
-                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+                result = try self.managedObjectContext!.fetch(fetch)
             } catch let nserror1 as NSError{
                 error = nserror1
                 result = nil
@@ -164,7 +165,7 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     // called when cancel button pressed
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
         self.searchBar.showsCancelButton = false
         self.searchBar.resignFirstResponder()
@@ -173,21 +174,21 @@ class BillsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         self.searchBar.showsCancelButton = true
         return true
     }
     
     
     //MARK: - LoadData
-    private func loadData() {
+    fileprivate func loadData() {
         autoreleasepool {
             var error: NSError? = nil
             var result: [AnyObject]?
             
-            let fetch: NSFetchRequest = NSFetchRequest(entityName: "SubCategory")
+            let fetch = NSFetchRequest<SubCategory>(entityName: "SubCategory")
             do {
-                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+                result = try self.managedObjectContext!.fetch(fetch)
             } catch let nserror1 as NSError{
                 error = nserror1
                 result = nil

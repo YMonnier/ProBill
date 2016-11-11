@@ -16,6 +16,6 @@ class BillHeaderView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = PBColor.lightYellow
-        self.title.textColor = UIColor.blackColor()
+        self.title.textColor = UIColor.black
     }
 }

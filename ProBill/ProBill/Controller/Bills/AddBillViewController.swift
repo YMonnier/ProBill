@@ -36,7 +36,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     var pictures: [UIImage] = []
     var subCategorieSelected: SubCategory?
-    var dateSelected: NSDate?
+    var dateSelected: Date?
     
     //Data
     var data: [Category] = []
@@ -46,22 +46,22 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        self.managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         self.title = "Your bill"
         
         //Register
-        self.pictureCollectionView!.registerNib(UINib(nibName: "PhotoCellView", bundle: NSBundle(forClass: AddBillViewController.self )), forCellWithReuseIdentifier: "PhotoCell")
-        self.pictureCollectionView!.registerNib(UINib(nibName: "AddPhotoCellView", bundle: NSBundle(forClass: AddBillViewController.self )), forCellWithReuseIdentifier: "AddPhotoCell")
+        self.pictureCollectionView!.register(UINib(nibName: "PhotoCellView", bundle: Bundle(for: AddBillViewController.self )), forCellWithReuseIdentifier: "PhotoCell")
+        self.pictureCollectionView!.register(UINib(nibName: "AddPhotoCellView", bundle: Bundle(for: AddBillViewController.self )), forCellWithReuseIdentifier: "AddPhotoCell")
 
         
         //Right button (save bill)
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: #selector(AddBillViewController.saveBill))
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(AddBillViewController.saveBill))
         self.navigationItem.rightBarButtonItem = doneButton
         
         //PictureCollectionView
         self.pictureCollectionView.delegate = self
         self.pictureCollectionView.dataSource = self
-        self.pictureCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
+        self.pictureCollectionView.backgroundColor = UIColor.black.withAlphaComponent(0.25)
         self.pictureCollectionView.layer.zPosition = 100
         
         //TextField
@@ -71,8 +71,8 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         //TextView (comment)
         self.commentTextview.delegate = self
-        self.commentTextview.layer.borderColor = UIColor.lightGrayColor().CGColor
-        self.commentTextview.textColor = UIColor.lightGrayColor()
+        self.commentTextview.layer.borderColor = UIColor.lightGray.cgColor
+        self.commentTextview.textColor = UIColor.lightGray
         self.commentTextview.layer.borderWidth = 0.5
         self.commentTextview.layer.cornerRadius = 5
         
@@ -93,9 +93,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK:- TextView (comment)
 
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
-        textView.textColor = UIColor.blackColor()
+        textView.textColor = UIColor.black
     }
     
     
@@ -103,13 +103,13 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      selection active tectField
      */
-    func textFieldDidBeginEditing(textField: UITextField) { // became first responder
+    func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
         print("activeTextField")
         self.activeTextField = textField
         switch textField {
         case self.categoryTextField:
             if !self.data.isEmpty {
-                self.categoryPickerView.selectedRowInComponent(0)
+                self.categoryPickerView.selectedRow(inComponent: 0)
                 self.pickerView(self.categoryPickerView, didSelectRow: 0, inComponent: 0)
             } else {
                 self.showSimpleAlert("Your bill", message: "There are no categories.")
@@ -117,7 +117,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             break
         case self.subCategoryTextField:
             if !self.subCatData.isEmpty {
-                self.subCategoryPickerView.selectedRowInComponent(0)
+                self.subCategoryPickerView.selectedRow(inComponent: 0)
                 self.pickerView(self.subCategoryPickerView, didSelectRow: 0, inComponent: 0)
             } else {
                 self.showSimpleAlert("Your bill", message: "There are no sub categories.")
@@ -131,9 +131,9 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      dismiss inputView when user touch outside the view
      */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesBegan(touches, with: event)
     }
     
     //MARK: - ToolBar (inputView)
@@ -142,19 +142,19 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
      Create toolbar with done button which dismiss the view
      - returns: toolbar
      */
-    private func createToolBar() -> UIToolbar {
-        let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
+    fileprivate func createToolBar() -> UIToolbar {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
         var items = [UIBarButtonItem]()
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddBillViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddBillViewController.donePressed))
         
         items.append(spaceButton)
         items.append(spaceButton)
         items.append(doneButton)
-        toolbar.barStyle = UIBarStyle.Black
+        toolbar.barStyle = UIBarStyle.black
         toolbar.barTintColor = PBColor.yellow
         toolbar.setItems(items, animated: true)
-        toolbar.userInteractionEnabled = true
+        toolbar.isUserInteractionEnabled = true
         return toolbar
     }
     
@@ -162,17 +162,17 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      Initilize DatePicker
      */
-    private func initDatePicker() {
+    fileprivate func initDatePicker() {
         self.createToolBar()
-        self.datePickerView.backgroundColor = UIColor.whiteColor()
-        self.datePickerView.datePickerMode = .Date
+        self.datePickerView.backgroundColor = UIColor.white
+        self.datePickerView.datePickerMode = .date
         
         //Add action when datePicker change value
-        datePickerView.addTarget(self, action: #selector(AddBillViewController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+        datePickerView.addTarget(self, action: #selector(AddBillViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         let toolBar: UIToolbar = self.createToolBar()
         toolBar
-        self.datePickerView.frame = CGRectMake(0, 0, 500, 250)
+        self.datePickerView.frame = CGRect(x: 0, y: 0, width: 500, height: 250)
         self.dateTextField.inputAccessoryView = toolBar
         self.dateTextField.inputView = self.datePickerView
     }
@@ -181,11 +181,11 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
      handler when date picker change value
      - parameter sender: sender UIDatePicker
      */
-    func datePickerValueChanged(sender:UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
-        dateTextField.text = dateFormatter.stringFromDate(sender.date)
+    func datePickerValueChanged(_ sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateTextField.text = dateFormatter.string(from: sender.date)
         self.dateSelected = sender.date
     }
     
@@ -193,12 +193,12 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      Initilize CategoryPicker
      */
-    private func initCategoryPicker() {
-        self.categoryPickerView.backgroundColor = UIColor.whiteColor()
+    fileprivate func initCategoryPicker() {
+        self.categoryPickerView.backgroundColor = UIColor.white
         let toolbar: UIToolbar = self.createToolBar()
         self.categoryPickerView.delegate = self
         self.categoryPickerView.dataSource = self
-        self.categoryPickerView.frame = CGRectMake(0, 0, 500, 250)
+        self.categoryPickerView.frame = CGRect(x: 0, y: 0, width: 500, height: 250)
         self.categoryTextField.inputAccessoryView = toolbar
         self.categoryTextField.inputView = self.categoryPickerView
     }
@@ -206,12 +206,12 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      Initilize SubCategoryPicker
      */
-    private func initSubCategoryPicker() {
-        self.subCategoryPickerView.backgroundColor = UIColor.whiteColor()
+    fileprivate func initSubCategoryPicker() {
+        self.subCategoryPickerView.backgroundColor = UIColor.white
         let toolbar: UIToolbar = self.createToolBar()
         self.subCategoryPickerView.delegate = self
         self.subCategoryPickerView.dataSource = self
-        self.subCategoryPickerView.frame = CGRectMake(0, 0, 500, 250)
+        self.subCategoryPickerView.frame = CGRect(x: 0, y: 0, width: 500, height: 250)
         self.subCategoryTextField.inputAccessoryView = toolbar
         self.subCategoryTextField.inputView = self.subCategoryPickerView
     }
@@ -225,11 +225,11 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: - PickerView Delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
         case self.categoryPickerView:
             return self.data.count
@@ -240,7 +240,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case self.categoryPickerView:
             return self.data[row].name
@@ -251,7 +251,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         autoreleasepool {
             switch pickerView {
             case self.categoryPickerView:
@@ -277,24 +277,24 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      Initilize picture button (Design)
      */
-    private func initPictureButton() {
+    fileprivate func initPictureButton() {
         self.takePictureButton.layer.cornerRadius = 0.5 * self.takePictureButton.bounds.size.width
         self.takePictureButton.layer.borderWidth = 3.0
-        self.takePictureButton.layer.borderColor = PBColor.blue.CGColor
+        self.takePictureButton.layer.borderColor = PBColor.blue.cgColor
         self.takePictureButton.layer.zPosition = 100
     }
     
-    @IBAction func takePictureAction(sender: UIButton) {
+    @IBAction func takePictureAction(_ sender: UIButton) {
         print("takePicture")
         self.imagePicker =  UIImagePickerController()
         self.imagePicker.delegate = self
-        self.imagePicker.sourceType = .Camera
-        self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        self.imagePicker.sourceType = .camera
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     //Delegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
         let imageFromCamera = (info[UIImagePickerControllerOriginalImage] as? UIImage)
         imageFromCamera!.fixOrientation()
         self.picture.image = imageFromCamera
@@ -304,41 +304,41 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //MARK: PictureCollectionView delegate/datasource
  
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.pictures.count + 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("AddPicturecell... \(indexPath)")
         //var cell: UICollectionViewCell?
         
-        if indexPath.row == self.pictures.count {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AddPhotoCell", forIndexPath: indexPath)
-            cell.backgroundColor = UIColor.clearColor()
+        if (indexPath as NSIndexPath).row == self.pictures.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddPhotoCell", for: indexPath)
+            cell.backgroundColor = UIColor.clear
             return cell
         } else {
-            let cell: PhotoCellView = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCellView
-            cell.picture.image = self.pictures[indexPath.row]
+            let cell: PhotoCellView = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCellView
+            cell.picture.image = self.pictures[(indexPath as NSIndexPath).row]
             return cell
         }
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("DidSelectItem ... \(indexPath)")
         //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! FTCalendarCellView
-        if indexPath.row == self.pictures.count {
+        if (indexPath as NSIndexPath).row == self.pictures.count {
             self.takePictureAction(self.takePictureButton)
         } else {
-            self.picture.image = self.pictures[indexPath.row]
+            self.picture.image = self.pictures[(indexPath as NSIndexPath).row]
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
-        return CGSizeMake(30,40);
+        return CGSize(width: 30,height: 40);
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
     {
         return UIEdgeInsetsMake(5, 20, 0, 0);
     }
@@ -349,16 +349,16 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         print(#function)
         if self.subCategorieSelected != nil && self.dateSelected != nil && self.picture.image != nil && !self.priceTextField.text!.isEmpty {
  
-            let bill: Bill = NSEntityDescription.insertNewObjectForEntityForName("Bill", inManagedObjectContext: self.managedObjectContext!) as! Bill
+            let bill: Bill = NSEntityDescription.insertNewObject(forEntityName: "Bill", into: self.managedObjectContext!) as! Bill
             
             bill.date = self.dateSelected!
-            bill.price = Double(self.priceTextField.text!.stringByReplacingOccurrencesOfString(",", withString: "."))!
+            bill.price = Double(self.priceTextField.text!.replacingOccurrences(of: ",", with: "."))!
             bill.subCategory = self.subCategorieSelected!
             bill.comment = self.commentTextview.text
             
             //Cross all images
             for image in self.pictures {
-                let picture: Picture = NSEntityDescription.insertNewObjectForEntityForName("Picture", inManagedObjectContext: self.managedObjectContext!) as! Picture
+                let picture: Picture = NSEntityDescription.insertNewObject(forEntityName: "Picture", into: self.managedObjectContext!) as! Picture
                 
                 //Save JPEG image with 0.0 compression (lowest quality)
                 picture.image = UIImageJPEGRepresentation(image, 0.0)!
@@ -367,7 +367,7 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
             do {
                 try self.managedObjectContext?.save()
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             } catch let error as NSError {
                 print("Error \(object_getClass(self)) \(#function) : \(error.debugDescription))")
                 self.showSimpleAlert("Add Bill", message: "Error in \(object_getClass(self)) \(#function): \(error.debugDescription))")
@@ -382,15 +382,15 @@ class AddBillViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     /**
      fetch all categories and save it to use with PickerUse
      */
-    private func loadData() {
+    fileprivate func loadData() {
         autoreleasepool {
             var error: NSError? = nil
             var result: [AnyObject]?
             
-            let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+            let fetch: NSFetchRequest<Category> = NSFetchRequest(entityName: "Category")
             
             do {
-                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+                result = try self.managedObjectContext!.fetch(fetch)
             } catch let nserror1 as NSError{
                 error = nserror1
                 result = nil

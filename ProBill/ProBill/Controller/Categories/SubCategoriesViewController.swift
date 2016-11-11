@@ -24,16 +24,16 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         //self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
         //Title
-        let label = UILabel(frame: CGRectMake(0, 0, 440, 44))
-        label.backgroundColor = UIColor.clearColor()
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 440, height: 44))
+        label.backgroundColor = UIColor.clear
         label.numberOfLines = 0
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.text = self.category!.name + "\nSub Category"
         self.navigationItem.titleView = label
         
-        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        self.managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(SubCategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
     }
     
@@ -44,24 +44,24 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     /**
      dismiss inputView when user touch outside the view
      */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.searchBar.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesBegan(touches, with: event)
     }
     
-    func insertNewObject(sender: AnyObject) {
-        let alert = UIAlertController(title: "Sub Categories", message: "", preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+    func insertNewObject(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "Sub Categories", message: "", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) -> Void in
             textField.placeholder = "Your sub category"
-            textField.autocapitalizationType = .Sentences
+            textField.autocapitalizationType = .sentences
         })
         
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             let textField = alert.textFields![0] as UITextField
             let subCategory = textField.text
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! SubCategory
+            let newManagedObject = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: context) as! SubCategory
             newManagedObject.name = subCategory!
             newManagedObject.category = self.category!
             
@@ -74,36 +74,36 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
             
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) in
-            alert.dismissViewControllerAnimated(true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
     //MARK: - TableView Delegate
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(self.fetchedResultsController.sections![0].numberOfObjects)
         return self.fetchedResultsController.sections![0].numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(indexPath.row)
-        let cell: CategoriesCellView = tableView.dequeueReusableCellWithIdentifier("CatCell") as! CategoriesCellView
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print((indexPath as NSIndexPath).row)
+        let cell: CategoriesCellView = tableView.dequeueReusableCell(withIdentifier: "CatCell") as! CategoriesCellView
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            context.delete(self.fetchedResultsController.object(at: indexPath) as! NSManagedObject)
             do {
                 try context.save()
             } catch {
@@ -113,14 +113,14 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     
-    private func configureCell(cell: CategoriesCellView, atIndexPath indexPath: NSIndexPath) {
-        let object: SubCategory = self.fetchedResultsController.objectAtIndexPath(indexPath) as! SubCategory
+    fileprivate func configureCell(_ cell: CategoriesCellView, atIndexPath indexPath: IndexPath) {
+        let object: SubCategory = self.fetchedResultsController.object(at: indexPath) as! SubCategory
         cell.name.text = "\(object.name)"
     }
     
     //MARK:- Search Control
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(#function)
         var predicate: NSPredicate? = NSPredicate(format: "category.name = %@", self.category!.name)
         
@@ -138,7 +138,7 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     // called when cancel button pressed
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
         self.searchBar.showsCancelButton = false
         self.searchBar.resignFirstResponder()
@@ -153,20 +153,20 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         self.searchBar.showsCancelButton = true
         return true
     }
     
     //MARK:- Fetch Control
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<SubCategory> {
         if self._fetchedResultsController != nil {
             return self._fetchedResultsController!
         }
         
-        let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("SubCategory", inManagedObjectContext: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest<SubCategory>()
+        let entity = NSEntityDescription.entity(forEntityName: "SubCategory", in: self.managedObjectContext!)
         fetchRequest.entity = entity
         fetchRequest.predicate = NSPredicate(format: "category.name = %@", self.category!.name)
         
@@ -186,38 +186,38 @@ class SubCategoriesViewController: UIViewController, UITableViewDataSource, UITa
         }
         return self._fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController? = nil
+    var _fetchedResultsController: NSFetchedResultsController<SubCategory>? = nil
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             return
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Left)
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)! as! CategoriesCellView, atIndexPath: indexPath!)
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .left)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            self.configureCell(tableView.cellForRow(at: indexPath!)! as! CategoriesCellView, atIndexPath: indexPath!)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }   
 }

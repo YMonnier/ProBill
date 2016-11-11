@@ -21,30 +21,30 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
-        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        self.managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         
         //Chart properties
         self.pieCharView.usePercentValuesEnabled = true
         self.pieCharView.drawSlicesUnderHoleEnabled = false
         self.pieCharView.holeRadiusPercent = 0.58
         self.pieCharView.transparentCircleRadiusPercent = 0.61
-        self.pieCharView.descriptionText = ""
+        self.pieCharView.chartDescription?.text = ""
         self.pieCharView.setExtraOffsets(left: 0, top: 50, right: 0, bottom: 50)
         self.pieCharView.drawHoleEnabled = true
         self.pieCharView.rotationAngle = 0.0
         self.pieCharView.rotationEnabled = true
         self.pieCharView.highlightPerTapEnabled = true
-        self.pieCharView.legend.enabled = true;
-        self.pieCharView.legend.position = .RightOfChart
+        self.pieCharView.legend.enabled = true
+        self.pieCharView.legend.horizontalAlignment = .right
         self.pieCharView.legend.xEntrySpace = 7.0
         self.pieCharView.legend.yEntrySpace = 0.0
         self.pieCharView.legend.yOffset = 0.0
-        self.pieCharView.delegate = self;
+        self.pieCharView.delegate = self
         
-        self.barCharView.descriptionText = "";
-        self.barCharView.noDataTextDescription = "You need to select a pie chart element.";
+        self.barCharView.chartDescription?.text = "";
+        self.barCharView.noDataText = "You need to select a pie chart element."
         
         self.barCharView.drawGridBackgroundEnabled = false
         
@@ -52,8 +52,8 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
         self.barCharView.setScaleEnabled(true)
         self.barCharView.pinchZoomEnabled = true
         
-        let xAxis: ChartXAxis = self.barCharView.xAxis
-        xAxis.labelPosition = .Bottom//XAxisLabelPositionBottom;
+        let xAxis: XAxis = self.barCharView.xAxis
+        xAxis.labelPosition = .bottom//XAxisLabelPositionBottom;
         
         self.barCharView.rightAxis.enabled = false
         
@@ -61,7 +61,7 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
         self.loadPieChart()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.loadData()
         self.loadPieChart()
     }
@@ -71,30 +71,31 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
     
     //MARK: - PieChar Delegate
     
-    func chartValueNothingSelected(chartView: ChartViewBase) {
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
         if chartView == self.pieCharView {
             
         }
     }
     
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: Highlight) {
         if chartView == self.pieCharView {
-            self.loadBarChar(entry.xIndex)
+            let x = Int(entry.x)
+            self.loadBarChar(x)
             print(entry.description)
-            print(self.data[entry.xIndex].name)
+            print(self.data[x].name)
         }
     }
     
     //MARK: - Load data
     
-    private func loadData() {
+    fileprivate func loadData() {
         autoreleasepool {
             var error: NSError? = nil
             var result: [AnyObject]?
             
-            let fetch: NSFetchRequest = NSFetchRequest(entityName: "Category")
+            let fetch = NSFetchRequest<Category>(entityName: "Category")
             do {
-                result = try self.managedObjectContext!.executeFetchRequest(fetch)
+                result = try self.managedObjectContext!.fetch(fetch)
             } catch let nserror1 as NSError{
                 error = nserror1
                 result = nil
@@ -110,7 +111,7 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
     /**
      Load the Pie chart with data from CoreData(Category)
      */
-    private func loadPieChart() {
+    fileprivate func loadPieChart() {
         print(#function)
         var subcategories: [String] = [] //X
         var dataEntries: [ChartDataEntry] = [] //Y
@@ -119,7 +120,7 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
             var sum: Double = 0.0
             let subC = Array(self.data[i].subCategories)
             for sub in subC { for bill in Array(sub.bills) {sum += bill.price} }
-            let dataEntry = ChartDataEntry(value: sum, xIndex: i)
+            let dataEntry = ChartDataEntry(x: sum, y: Double(i))
             dataEntries.append(dataEntry)
         }
         
@@ -128,9 +129,9 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
             subcategories.append(self.data[i].name)
         }
         
-        let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "Categories")
-        
-        let pieChartData = PieChartData(xVals: subcategories, dataSet: pieChartDataSet)
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Categories")
+        let pieChartData = PieChartData(dataSet: pieChartDataSet)
+        //let pieChartData = PieChartData(xVals: subcategories, dataSet: pieChartDataSet)
         self.pieCharView.data = pieChartData
         
         
@@ -141,19 +142,20 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
         }
         
         pieChartDataSet.colors = colors
-        let nFormmater: NSNumberFormatter = NSNumberFormatter()
-        nFormmater.numberStyle = .PercentStyle
+        let nFormmater: NumberFormatter = NumberFormatter()
+        nFormmater.numberStyle = .percent
         nFormmater.maximumFractionDigits = 1
         nFormmater.multiplier = 1.0
         nFormmater.percentSymbol = " %"
-        pieChartData.setValueFormatter(nFormmater)
+        
+        //pieChartData.setValueFormatter(nFormmater)
         pieChartData.setValueFont(NSUIFont(name: "Avenir-Light", size: 11))
-        pieChartData.setValueTextColor(UIColor.blackColor())
+        //pieChartData.setValueTextColor(UIColor.blackColor())
         
         print(#function)
     }
     
-    private func loadBarChar(index: Int) {
+    fileprivate func loadBarChar(_ index: Int) {
         let subCategories: [SubCategory] = Array(self.data[index].subCategories)
         var xValues: [String?] = [] //X
         var dataEntries: [BarChartDataEntry] = [] //Y
@@ -165,14 +167,16 @@ class StatisticsViewController: UIViewController, ChartViewDelegate {
         for i in 0..<subCategories.count {
             var sum: Double = 0.0
             for bill in Array(subCategories[i].bills) { sum += bill.price }
-            let dataEntry = BarChartDataEntry(value: sum, xIndex: i)
+            //let dataEntry = BarChartDataEntry(value: sum, xIndex: i)
+            let dataEntry = BarChartDataEntry(x: sum, y: Double(i))
             dataEntries.append(dataEntry)
         }
         
-        let barSet = BarChartDataSet(yVals: dataEntries, label: "Sub-Categories")
+        let barSet = BarChartDataSet(values: dataEntries, label: "Sub-Categories")
         barSet.setColor(UIColor.random())
-        let barData = BarChartData(xVals: xValues, dataSet: barSet)
-        barData.groupSpace = 0.8
+        
+        let barData = BarChartData(dataSet: barSet)//BarChartData(xVals: xValues, dataSet: barSet)
+        //barData.groupSpace = 0.8
         barData.setValueFont(NSUIFont(name: "Avenir-Light", size: 14))
         self.barCharView.data = barData
     }

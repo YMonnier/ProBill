@@ -19,12 +19,12 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        self.managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         
         //Delete useless separator cell
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CategoriesViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         
         
@@ -39,27 +39,27 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     /**
      dismiss inputView when user touch outside the view
      */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.searchBar.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesBegan(touches, with: event)
     }
     
     /**
         Show alerte with textField + Insert new category
     */
-    func insertNewObject(sender: AnyObject) {
-        let alert = UIAlertController(title: "Categories", message: "", preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+    func insertNewObject(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "Categories", message: "", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) -> Void in
             textField.placeholder = "Your category"
-            textField.autocapitalizationType = .Sentences
+            textField.autocapitalizationType = .sentences
         })
         
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             let textField = alert.textFields![0] as UITextField
             let category = textField.text
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Category
+            let newManagedObject = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: context) as! Category
             
             newManagedObject.name = category!
             
@@ -72,11 +72,11 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) in
-            alert.dismissViewControllerAnimated(true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
         /*
          */
@@ -84,11 +84,11 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSubCat" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
-                let controller = segue.destinationViewController as! SubCategoriesViewController
+                let object: Category = self.fetchedResultsController.object(at: indexPath) as! Category
+                let controller = segue.destination as! SubCategoriesViewController
                 controller.category = object
             }
         }
@@ -96,31 +96,31 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: - TableView Delegate
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         print("\(#function) -- \(self.fetchedResultsController.sections?.count ?? 0)")
         return self.fetchedResultsController.sections?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("\(#function) -- \(self.fetchedResultsController.sections![0].numberOfObjects)")
         return self.fetchedResultsController.sections![0].numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(indexPath.row)
-        let cell: CategoriesCellView = tableView.dequeueReusableCellWithIdentifier("CatCell") as! CategoriesCellView
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print((indexPath as NSIndexPath).row)
+        let cell: CategoriesCellView = tableView.dequeueReusableCell(withIdentifier: "CatCell") as! CategoriesCellView
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            context.delete(self.fetchedResultsController.object(at: indexPath) as! NSManagedObject)
             do {
                 try context.save()
             } catch {
@@ -130,14 +130,14 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    private func configureCell(cell: CategoriesCellView, atIndexPath indexPath: NSIndexPath) {
-        let object: Category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
+    fileprivate func configureCell(_ cell: CategoriesCellView, atIndexPath indexPath: IndexPath) {
+        let object: Category = self.fetchedResultsController.object(at: indexPath) as! Category
         cell.name.text = "\(object.name)"
     }
     
     //MARK:- Search Control
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(#function)
         var predicate: NSPredicate? = nil
         
@@ -155,7 +155,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // called when cancel button pressed
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
         self.searchBar.showsCancelButton = false
         self.searchBar.resignFirstResponder()
@@ -170,20 +170,20 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         self.searchBar.showsCancelButton = true
         return true
     }
     
     //MARK:- Fetch Control
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<Category> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest<Category>()
+        let entity = NSEntityDescription.entity(forEntityName: "Category", in: self.managedObjectContext!)
         fetchRequest.entity = entity
         
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -201,38 +201,39 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         }
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController? = nil
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    var _fetchedResultsController: NSFetchedResultsController<Category>? = nil
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             return
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Left)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)! as! CategoriesCellView, atIndexPath: indexPath!)
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .left)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            self.configureCell(tableView.cellForRow(at: indexPath!)! as! CategoriesCellView, atIndexPath: indexPath!)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
 }

@@ -11,6 +11,6 @@ import CoreData
 
 @objc(Picture)
 class Picture: NSManagedObject {
-    @NSManaged var image: NSData
+    @NSManaged var image: Data
     @NSManaged var bill: Bill
 }
